@@ -24,6 +24,16 @@ public class User {
     public User() {
     }
 
+    public User(String username, String password, String avatar, String fullName, String address, String phone, Role role) {
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+        this.fullName = fullName;
+        this.address = address;
+        this.phone = phone;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

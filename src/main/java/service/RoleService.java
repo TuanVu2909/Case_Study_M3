@@ -22,10 +22,13 @@ public class RoleService implements Service<Role> {
         }
         return roleService;
     }
+    public Role getById(int id){
+      return roleDAO.getById(id);
+    }
 
     @Override
     public List<Role> getList() {
-        return null;
+        return roleDAO.getRoleList();
     }
 
     @Override

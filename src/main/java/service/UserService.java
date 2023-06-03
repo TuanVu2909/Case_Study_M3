@@ -13,7 +13,7 @@ public class UserService implements Service<User> {
 
     private UserService() {
         userList = new ArrayList<>();
-        userDAO=new UserDAO();
+        userDAO = new UserDAO();
     }
 
     public static UserService getInstance() {
@@ -24,26 +24,29 @@ public class UserService implements Service<User> {
     }
 
 
-    public User getUserByID(int id){
-        return null;
+    public User getUserByID(int id) {
+        return userDAO.getUserByID(id);
     }
-    public void deleteById(int id){
+
+    public void deleteById(int id) {
+        userDAO.deleteById(id);
 
     }
 
     @Override
     public List<User> getList() {
-        return null;
+        return userDAO.getUserList();
     }
 
     @Override
     public void create(User user) {
+        userDAO.createUser(user);
 
     }
 
     @Override
     public void update(User user) {
-
+        userDAO.updateUser(user);
     }
 
     @Override

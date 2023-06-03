@@ -6,7 +6,7 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService {
+public class UserService implements Service<User> {
     private final List<User> userList;
     private static UserService userService;
     private final UserDAO userDAO;
@@ -22,19 +22,37 @@ public class UserService {
         }
         return userService;
     }
-    public List<User> getUserList(){
-        return null;
-    }
-    public void createUser(User user){
 
-    }
-    public  void updateUser(User user){
 
-    }
     public User getUserByID(int id){
         return null;
     }
     public void deleteById(int id){
+
+    }
+
+    @Override
+    public List<User> getList() {
+        return null;
+    }
+
+    @Override
+    public void create(User user) {
+
+    }
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public void displayALL() {
 
     }
 }

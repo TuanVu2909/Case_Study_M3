@@ -22,6 +22,13 @@ public class RoleService implements Service<Role> {
         }
         return roleService;
     }
+    public Role getById(int id){
+        for (Role r:roleList) {
+            if(r.getId() == id){
+                return r;
+            }
+        }return null;
+    }
 
     @Override
     public List<Role> getList() {

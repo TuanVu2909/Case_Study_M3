@@ -1,8 +1,8 @@
 package service;
 
 public interface Service<E> {
-    E create();
-    E update();
-    E delete();
+    void create(E e);
+    void update(E e);
+    void delete();
     void displayALL();
 }

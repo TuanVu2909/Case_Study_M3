@@ -16,7 +16,7 @@ public class RoleDAO {
     public RoleDAO(){
 
     }
-    private List<Role> getRoleList(){
+    public List<Role> getRoleList(){
         List<Role> roleList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ROLE)){
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -32,7 +32,7 @@ public class RoleDAO {
         }
         return roleList;
     }
-    private Role getById(int id){
+    public Role getById(int id){
         Role role = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ROLE_BY_ID)){
             preparedStatement.setInt(1,id);

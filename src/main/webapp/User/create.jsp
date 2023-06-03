@@ -55,8 +55,9 @@
             </select>
         </div>
         <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Create</button>
+            <button class="btn btn-primary" type="submit">Register</button>
             <a class="btn btn-secondary" href="/UserServlet">Back to home</a>
+            <a class="btn btn-secondary" href="/Login/login.jsp">Back to Login</a>
         </div>
     </form>
 </div>

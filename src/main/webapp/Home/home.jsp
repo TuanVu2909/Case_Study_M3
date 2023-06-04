@@ -17,7 +17,6 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
-</div>
 <form style="width: 600px; margin: auto"
       action="/UserServlet?action=login">
     <div class="row">
@@ -28,7 +27,6 @@
         <a class="btn btn-secondary" href="/UserServlet">Back to Menu</a>
     </div>
     </div>
-</div>
 </form>
 </body>
 </html>

@@ -26,22 +26,32 @@ public class Home_StayService implements Service<Home_Stay> {
 
     @Override
     public List<Home_Stay> getList() {
-        return null;
+        return home_stayDAO.getList();
+    }
+    public Home_Stay getHomeById(int id){
+        return home_stayDAO.getHomeStayByID(id);
     }
 
     @Override
     public void create(Home_Stay homeStay) {
-
+        home_stayDAO.create(homeStay);
     }
+
 
     @Override
     public void update(Home_Stay homeStay) {
-
+        home_stayDAO.update(homeStay);
     }
 
     @Override
     public void delete() {
 
+    }
+    public void deleteById(int id){
+        home_stayDAO.deleteById(id);
+    }
+    public List<Home_Stay> searchName(String name){
+        return home_stayDAO.searchName(name);
     }
 
     @Override

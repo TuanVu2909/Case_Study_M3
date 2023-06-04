@@ -24,9 +24,18 @@ public class BookingService implements Service<Booking> {
         return bookingService;
     }
 
+    public Booking getBookingById(int id){
+        return bookingDAO.getBookingByID();
+    }
+    public void deleteById(int id) {
+        bookingDAO.deleteById(id);
+
+    }
+
     @Override
     public List<Booking> getList() {
         return null;
+//                bookingDAO.getBookingList();
     }
 
     @Override

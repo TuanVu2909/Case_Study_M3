@@ -2,6 +2,7 @@ package service;
 
 
 import DAO.StatusDAO;
+import model.Role;
 import model.Status;
 
 import java.util.ArrayList;
@@ -26,9 +27,12 @@ public class StatusService implements Service<Status> {
         return statusService;
     }
 
+    public Status getById(int id){
+        return statusDAO.getById(id);
+    }
     @Override
     public List<Status> getList() {
-        return null;
+        return statusDAO.getStatusList();
     }
 
     @Override

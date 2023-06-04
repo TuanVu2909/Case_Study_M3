@@ -23,14 +23,15 @@
     <div class="mb-3">
         <label for="username" class="form-label">UserName </label>
         <input type="text" class="form-control" id="username" name="username">
-    </div>  <div class="mb-3">
-    <div class="mb-3">
-        <label for="password" class="form-label">Password </label>
-        <input type="text" class="form-control" id="password" name="password">
     </div>
-    <button class="btn btn-primary" type="submit">Login</button>
-    <a class="btn btn-secondary" href="/UserServlet?action=create">Register</a>
-</div>
+    <div class="mb-3">
+        <div class="mb-3">
+            <label for="password" class="form-label">Password </label>
+            <input type="text" class="form-control" id="password" name="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="btn btn-secondary" href="/UserServlet?action=create">Register</a>
+    </div>
 
 </form>
 </div>

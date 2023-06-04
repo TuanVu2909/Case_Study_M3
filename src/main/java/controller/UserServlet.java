@@ -28,9 +28,6 @@ public class UserServlet extends HttpServlet {
             case "update":
                 updateGet(request, response);
                 break;
-            case "change":
-                changeGet(request, response);
-                break;
             case "delete":
                 delete(request, response);
                 break;
@@ -52,9 +49,9 @@ public class UserServlet extends HttpServlet {
             case "update":
                 updatePost(request, response);
                 break;
-            case "change":
-                changePot(request, response);
-                break;
+//            case "search":
+//                search(request, response);
+//                break;
         }
     }
     private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

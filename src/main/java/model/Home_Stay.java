@@ -19,6 +19,15 @@ public class Home_Stay {
         this.user = user;
     }
 
+    public Home_Stay(String home_name, String address, String depict, double price, String avatar, User user) {
+        this.home_name = home_name;
+        this.address = address;
+        this.depict = depict;
+        this.price = price;
+        this.avatar = avatar;
+        this.user = user;
+    }
+
     public Home_Stay() {
     }
 

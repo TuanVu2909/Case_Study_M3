@@ -109,7 +109,7 @@ public class UserServlet extends HttpServlet {
         Role role = roleService.getById(roleId);
         User user = new User(id,username,password,avatar,full_name,address,phone,role);
         if (user != null) {
-            userService.update(user);
+            userService.update(new User(id,username,password,avatar,full_name,address,phone,role));
             response.sendRedirect("/UserServlet");
         }else  {
             response.sendRedirect("/404.jsp");

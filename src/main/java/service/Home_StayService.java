@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home_StayService implements Service<Home_Stay> {
+    private final List<Home_Stay> home_stayList;
     private static Home_StayService home_stayService;
     private final Home_StayDAO home_stayDAO;
 

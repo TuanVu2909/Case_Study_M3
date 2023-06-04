@@ -106,11 +106,11 @@ public class Home_StayServlet extends HttpServlet {
         String depict = request.getParameter("depict");
         double price = Double.parseDouble(request.getParameter("price"));
         String  avatar = request.getParameter("avatar");
-        int admin_id = Integer.parseInt(request.getParameter("admin_id"));
+        int admin_id = Integer.parseInt(request.getParameter("user"));
         User user = userService.getUserByID(admin_id) ;
         Home_Stay homeStay = new Home_Stay(id,home_name,address,depict,price,avatar,user);
-        if (user != null){
-            home_stayService.update(homeStay);
+        if (homeStay != null){
+            home_stayService.update(new Home_Stay(id,home_name,address,depict,price,avatar,user));
             response.sendRedirect("/Home_StayServlet");
         } else {
             response.sendRedirect("/404.jsp");

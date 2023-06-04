@@ -127,5 +127,4 @@ public class Home_StayDAO {
         }
         return home_stayList;
     }
-
 }

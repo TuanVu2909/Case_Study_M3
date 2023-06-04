@@ -19,7 +19,8 @@
 <body>
 <div class="container">
     <h1 style="text-align: center">Form create HomeStay</h1>
-    <form style="width: 600px; margin: auto" action="/Home_StayServlet?action=update&&id=${home_stay.id} method="post">
+    <form style="width: 600px; margin: auto"
+          action="/Home_StayServlet?action=update&&id=${home_stay.id}" method="post">
         <div class="mb-3">
             <label for="home_name" class="form-label">HomeName</label>
             <input type="text" class="form-control" name="home_name"
@@ -46,10 +47,10 @@
                    id="avatar" placeholder="Enter avatar" value=" ${home_stay.avatar}">
         </div>
         <div class="mb-3">
-            <label for="admin_id" class="form-label">admin_id</label>
-            <select class="form-select" id="admin_id" name="admin_id"
+            <label for="user" class="form-label">Admin</label>
+            <select class="form-select" id="user" name="user"
                     aria-label="Default select example">
-                <option selected>--- Choice admin_id ---</option>
+                <option selected>--- Choice Admin ---</option>
                 <c:forEach items="${user}" var="u">
                     <option value="${u.id}">${u.username}</option>
                 </c:forEach>

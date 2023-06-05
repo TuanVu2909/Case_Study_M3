@@ -23,6 +23,7 @@ public class BookingDAO implements Service<Booking> {
     private final Connection connection = MyConnection.getConnection();
     private final Home_StayService home_stayService = Home_StayService.getInstance();
     private final UserService userService = UserService.getInstance();
+    private final ActionService actionService = ActionService.getInstance();
     private final String SELECT_ALL_BOOKING = "select * from booking;";
     private final String SELECT_BY_ID_BOOKING = "select * from booking where id = ?;";
     private final String INSERT_INTO_BOOKING
@@ -46,9 +47,10 @@ public class BookingDAO implements Service<Booking> {
                 int user_id = resultSet.getInt("user_id");
                 Date start_date = resultSet.getDate("start_date");
                 Date end_date = resultSet.getDate("end_date");
-                boolean action = resultSet.getBoolean("action");
+                int action_id = resultSet.getInt("action_id");
                 Home_Stay home_stay = home_stayService.getHomeById(home_id);
                 User user = userService.getUserByID(user_id);
+                Action action = actionService.getById(action_id);
                 Booking booking = new Booking(id, user, home_stay, start_date, end_date, action);
                 bookingList.add(booking);
             }
@@ -67,9 +69,10 @@ public class BookingDAO implements Service<Booking> {
                 int user_id = resultSet.getInt("user_id");
                 Date start_date = resultSet.getDate("start_date");
                 Date end_date = resultSet.getDate("end_date");
-                boolean action = resultSet.getBoolean("action");
+                int action_id = resultSet.getInt("action_id");
                 Home_Stay home_stay = home_stayService.getHomeById(home_id);
                 User user = userService.getUserByID(user_id);
+                Action action = actionService.getById(action_id);
                 booking = new Booking(id, user, home_stay, start_date, end_date, action);
             }
         }catch (SQLException e){
@@ -86,7 +89,7 @@ public class BookingDAO implements Service<Booking> {
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setDate(3, (java.sql.Date) booking.getStart_date());
             preparedStatement.setDate(4, (java.sql.Date) booking.getEnd_date());
-            preparedStatement.setBoolean(5, booking.isAction());
+            preparedStatement.setInt(5, booking.getAction().getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +103,7 @@ public class BookingDAO implements Service<Booking> {
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setDate(3, (java.sql.Date) booking.getStart_date());
             preparedStatement.setDate(4, (java.sql.Date) booking.getEnd_date());
-            preparedStatement.setBoolean(5, booking.isAction());
+            preparedStatement.setInt(5, booking.getAction().getId());
             preparedStatement.setInt(6, booking.getId());
 
             preparedStatement.executeUpdate();

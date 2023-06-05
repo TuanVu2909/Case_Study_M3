@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-lg-2">
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/Home_StayServlet?action=create">Create
-                new Home_Stay</a>
+                new Search</a>
         </div>
         <div class="col-lg-6">
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/UserServlet">Back Home User</a>

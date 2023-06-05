@@ -9,6 +9,10 @@ public class Bill {
         this.booking = booking;
     }
 
+    public Bill(Booking booking) {
+        this.booking = booking;
+    }
+
     public Bill() {
     }
 

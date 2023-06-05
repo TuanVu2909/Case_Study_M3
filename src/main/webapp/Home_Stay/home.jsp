@@ -49,7 +49,7 @@
             <th>Price</th>
             <th>Avatar</th>
             <th>Status</th>
-            <th>Admin</th>
+            <th>User</th>
             <th colspan="2" style="text-align: center">Action</th>
         </tr>
         </thead>
@@ -71,6 +71,7 @@
                 <td>
                     <button class="btn btn-danger" onclick="deleteS(${h.id})">Delete</button>
                 </td>
+
                 <td>
                     <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${h.id}">Booking</a>
                 </td>
@@ -86,5 +87,6 @@
             window.location.href = `http://localhost:8080/Home_StayServlet?action=delete&&id=` + id
         }
     }
+
 </script>
 </html>

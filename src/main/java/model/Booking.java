@@ -9,9 +9,9 @@ public class Booking {
 
     private Date start_date;
     private Date end_date;
-    private boolean action;
+    private Action action;
 
-    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, boolean action) {
+    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, Action action) {
         this.id = id;
         this.user = user;
         this.homeStay = homeStay;
@@ -23,7 +23,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, boolean action) {
+    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, Action action) {
         this.user = user;
         this.homeStay = homeStay;
         this.start_date = start_date;
@@ -72,11 +72,11 @@ public class Booking {
         this.end_date = end_date;
     }
 
-    public boolean isAction() {
+    public Action getAction() {
         return action;
     }
 
-    public void setAction(boolean action) {
+    public void setAction(Action action) {
         this.action = action;
     }
 }

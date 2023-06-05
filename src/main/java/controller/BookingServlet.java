@@ -1,16 +1,14 @@
 package controller;
 
-import model.Home_Stay;
-import model.Status;
-import model.User;
-import service.BookingService;
-import service.Home_StayService;
-import service.UserService;
+import model.*;
+import service.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "BookingServlet", value = "/BookingServlet")
@@ -18,6 +16,8 @@ public class BookingServlet extends HttpServlet {
     private final BookingService bookingService = BookingService.getInstance();
     private final UserService userService = UserService.getInstance();
     private final Home_StayService home_stayService = Home_StayService.getInstance();
+    private final ActionService actionService = ActionService.getInstance();
+    private final BillService billService = BillService.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -37,6 +37,9 @@ public class BookingServlet extends HttpServlet {
                 break;
             case "booking":
                 bookingGet(request, response);
+                break;
+            case "booking2":
+                bookingBill(request, response);
                 break;
 
             default:
@@ -90,7 +93,6 @@ public class BookingServlet extends HttpServlet {
         int admin_id = Integer.parseInt(request.getParameter("admin_id"));
         int status_id = Integer.parseInt(request.getParameter("status_id"));
         User user = userService.getUserByID(admin_id) ;
-//        Status status = statusService.getById(status_id);
         if (user != null) {
 //            Home_Stay homeStay = new Home_Stay(home_name,address,depict,price,avatar,user,status);
 //            home_stayService.create(homeStay);
@@ -158,5 +160,18 @@ public class BookingServlet extends HttpServlet {
         request.setAttribute("home_stay",home_stay);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
+    }
+    private void bookingBill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Home_Stay home_stay = home_stayService.getHomeById(id);
+        int user_id = home_stay.getUser().getId();
+        User user = userService.getUserByID(user_id);
+        Date start_date = (Date) request.getRequestDispatcher("startDate");
+        Date end_date = (Date) request.getRequestDispatcher("endDate");
+        Action action = actionService.getById(1);
+        Booking booking =new Booking(user,home_stay,start_date,end_date,action);
+        Bill bill = new Bill(booking);
+        billService.create(bill);
+      response.sendRedirect("/Booking/home.jsp");
     }
 }

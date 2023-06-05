@@ -1,18 +1,13 @@
 package controller;
 
-import model.Home_Stay;
-import model.Role;
-import model.Status;
-import model.User;
-import service.Home_StayService;
-import service.RoleService;
-import service.StatusService;
-import service.UserService;
+import model.*;
+import service.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "Home_StayServlet", value = "/Home_StayServlet")
@@ -20,6 +15,7 @@ public class Home_StayServlet extends HttpServlet {
         private final Home_StayService home_stayService = Home_StayService.getInstance();
         private final UserService userService = UserService.getInstance();
         private final StatusService statusService = StatusService.getInstance();
+        private final BookingService bookingService = BookingService.getInstance();
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -155,10 +151,12 @@ public class Home_StayServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
     private void bookingGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Home_Stay> home_stayList = new ArrayList<>();
             int id = Integer.parseInt(request.getParameter("id"));
             Home_Stay home_stay = home_stayService.getHomeById(id);
-            request.setAttribute("home_stay",home_stay);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+            home_stayList.add(home_stay);
+            request.setAttribute("homestay",home_stay);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/bookingHomeStay.jsp");
         requestDispatcher.forward(request, response);
     }
 }

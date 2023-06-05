@@ -37,6 +37,9 @@ public class Home_StayServlet extends HttpServlet {
                 case "delete":
                     delete(request, response);
                     break;
+                case "booking":
+                    bookingGet(request, response);
+                    break;
 
                 default:
                     findAdd(request, response);
@@ -149,6 +152,13 @@ public class Home_StayServlet extends HttpServlet {
         List<Home_Stay> home_stayList = home_stayService.searchByStatus2();
         request.setAttribute("home_stay", home_stayList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/getStatus.jsp");
+        requestDispatcher.forward(request, response);
+    }
+    private void bookingGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Home_Stay home_stay = home_stayService.getHomeById(id);
+            request.setAttribute("home_stay",home_stay);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }
 }

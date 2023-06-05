@@ -71,6 +71,9 @@
                 <td>
                     <button class="btn btn-danger" onclick="deleteS(${h.id})">Delete</button>
                 </td>
+                <td>
+                    <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${h.id}">Booking</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

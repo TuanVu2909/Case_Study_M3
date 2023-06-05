@@ -11,8 +11,10 @@ import java.util.List;
 
 public class StatusDAO {
     private final Connection connection;
-    private final String SELECT_ALL = "select * from status;";
+
     private final String SELECT_BY_ID = "select * from status where id=?;";
+
+    private final String SELECT_ALL_STATUS = "select * from status;";
 
 
     public StatusDAO() {
@@ -35,18 +37,19 @@ public class StatusDAO {
     }
 
     public List<Status> getStatusList() {
-        List<Status> statusList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL)) {
+        List<Status> roleList = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STATUS)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 Status status = new Status(id, name);
-                statusList.add(status);
+                roleList.add(status);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return statusList;
+        return roleList;
     }
 }

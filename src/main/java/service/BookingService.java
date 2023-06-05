@@ -14,7 +14,7 @@ public class BookingService implements Service<Booking> {
 
     private BookingService() {
         bookingList = new ArrayList<>();
-        bookingDAO=new BookingDAO();
+        bookingDAO = new BookingDAO();
     }
 
     public static BookingService getInstance() {
@@ -24,28 +24,29 @@ public class BookingService implements Service<Booking> {
         return bookingService;
     }
 
-    public Booking getBookingById(int id){
-        return bookingDAO.getBookingByID();
+    public Booking getBookingById(int id) {
+        return bookingDAO.getById(id);
     }
+
     public void deleteById(int id) {
-        bookingDAO.deleteById(id);
+        bookingDAO.delete(id);
 
     }
 
     @Override
     public List<Booking> getList() {
-        return null;
-//                bookingDAO.getBookingList();
+        return
+                bookingDAO.getList();
     }
 
     @Override
     public void create(Booking booking) {
-
+        bookingDAO.create(booking);
     }
 
     @Override
     public void update(Booking booking) {
-
+        bookingDAO.update(booking);
     }
 
     @Override

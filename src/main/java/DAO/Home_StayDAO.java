@@ -1,7 +1,9 @@
 package DAO;
 
 import model.Home_Stay;
+import model.Status;
 import model.User;
+import service.StatusService;
 import service.UserService;
 
 
@@ -15,10 +17,11 @@ import java.util.List;
 public class Home_StayDAO {
     private final Connection connection = MyConnection.getConnection();
     private UserService userService = UserService.getInstance();
+    private StatusService statusService = StatusService.getInstance();
     private final String SELECT_ALL_HOMESTAY = "select * from home_stay;";
     private final String SELECT_BY_ID_HOMESTAY = "select * from home_stay where id = ?;";
-    private final String INSERT_INTO_HOMESTAY = "insert into home_stay(name,address,depict,price,avatar,admin_id) value (?,?,?,?,?,?);";
-    private final String UPDATE_BY_ID_HOMESTAY = "update home_stay set name = ?,address= ?,depict=?,price = ?,avatar = ?, admin_id = ? where id = ?;";
+    private final String INSERT_INTO_HOMESTAY = "insert into home_stay(name,address,depict,price,avatar,admin_id,status_id) value (?,?,?,?,?,?,?);";
+    private final String UPDATE_BY_ID_HOMESTAY = "update home_stay set name = ?,address= ?,depict=?,price = ?,avatar = ?, admin_id = ?, status_id = ? where id = ?;";
     private final String DELETE_BY_ID_HOMESTAY = "delete from home_stay where id = ?";
     private final String SEARCH_NAME_HOMESTAY = "select * from home_stay where name like ?;";
 
@@ -36,8 +39,10 @@ public class Home_StayDAO {
                 double price = resultSet.getDouble("price");
                 String  avatar = resultSet.getString("avatar");
                 int admin_id = resultSet.getInt("admin_id");
+                int status_id = resultSet.getInt("status_id");
                 User user = userService.getUserByID(admin_id) ;
-                Home_Stay homeStay = new Home_Stay(id,name,address,depict,price,avatar,user);
+                Status status = statusService.getById(status_id);
+                Home_Stay homeStay = new Home_Stay(id,name,address,depict,price,avatar,user,status);
                 home_stayList.add(homeStay);
             }
         }catch (SQLException e){
@@ -58,8 +63,10 @@ public class Home_StayDAO {
                 double price = resultSet.getDouble("price");
                 String  avatar = resultSet.getString("avatar");
                 int admin_id = resultSet.getInt("admin_id");
+                int status_id = resultSet.getInt("status_id");
                 User user = userService.getUserByID(admin_id) ;
-                homeStay = new Home_Stay(id,name,address,depict,price,avatar,user);
+                Status status = statusService.getById(status_id);
+                homeStay = new Home_Stay(id,name,address,depict,price,avatar,user,status);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -74,7 +81,8 @@ public class Home_StayDAO {
             preparedStatement.setString(3, homeStay.getDepict());
             preparedStatement.setDouble(4, homeStay.getPrice());
             preparedStatement.setString(5, homeStay.getAvatar());
-            preparedStatement.setInt(6, homeStay.getUser().getId());
+            preparedStatement.setInt(6, homeStay.getStatus().getId());
+            preparedStatement.setInt(7, homeStay.getUser().getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -89,7 +97,8 @@ public class Home_StayDAO {
             preparedStatement.setDouble(4, homeStay.getPrice());
             preparedStatement.setString(5, homeStay.getAvatar());
             preparedStatement.setInt(6, homeStay.getUser().getId());
-            preparedStatement.setInt(7,homeStay.getId());
+            preparedStatement.setInt(7, homeStay.getStatus().getId());
+            preparedStatement.setInt(8,homeStay.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -117,8 +126,10 @@ public class Home_StayDAO {
                 double price = resultSet.getDouble("price");
                 String  avatar = resultSet.getString("avatar");
                 int admin_id = resultSet.getInt("admin_id");
+                int status_id = resultSet.getInt("status_id");
                 User user = userService.getUserByID(admin_id) ;
-                Home_Stay homeStay = new Home_Stay(id,name1,address,depict,price,avatar,user);
+                Status status = statusService.getById(status_id);
+                Home_Stay homeStay = new Home_Stay(id,name1,address,depict,price,avatar,user,status);
                 home_stayList.add(homeStay);
             }
         }catch (SQLException e){

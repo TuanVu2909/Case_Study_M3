@@ -10,25 +10,28 @@ public class Booking {
     private Date start_date;
     private Date end_date;
     private Action action;
+    private int isBill;
 
-    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, Action action) {
+    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, Action action, int isBill) {
         this.id = id;
         this.user = user;
         this.homeStay = homeStay;
         this.start_date = start_date;
         this.end_date = end_date;
         this.action = action;
+        this.isBill = isBill;
     }
 
     public Booking() {
     }
 
-    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, Action action) {
+    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, Action action, int isBill) {
         this.user = user;
         this.homeStay = homeStay;
         this.start_date = start_date;
         this.end_date = end_date;
         this.action = action;
+        this.isBill = isBill;
     }
 
     public int getId() {
@@ -55,7 +58,6 @@ public class Booking {
         this.homeStay = homeStay;
     }
 
-
     public Date getStart_date() {
         return start_date;
     }
@@ -70,6 +72,14 @@ public class Booking {
 
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
+    }
+
+    public int getIsBill() {
+        return isBill;
+    }
+
+    public void setIsBill(int isBill) {
+        this.isBill = isBill;
     }
 
     public Action getAction() {

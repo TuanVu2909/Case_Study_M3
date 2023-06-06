@@ -5,12 +5,9 @@ import service.Home_StayService;
 
 import service.UserService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.Booking;
@@ -27,10 +24,11 @@ public class BookingDAO implements Service<Booking> {
     private final String SELECT_ALL_BOOKING = "select * from booking;";
     private final String SELECT_BY_ID_BOOKING = "select * from booking where id = ?;";
     private final String INSERT_INTO_BOOKING
-            = "insert into booking(home_id,user_id,start_date,end_date,action) value (?,?,?,?,?);";
+            = "insert into booking(home_id,user_id,start_date,end_date,action_id,isBill) value (?,?,?,?,?,?);";
     private final String UPDATE_BY_ID_BOOKING
-            = "update booking set home_id = ?,user_id = ?,start_date = ?,end_date = ?,action = ?  where id = ?;";
+            = "update booking set home_id = ?,user_id = ?,start_date = ?,end_date = ?,action_id = ?,isBill = ?  where id = ?;";
     private final String DELETE_BY_ID_BOOKING = "delete from booking where id = ?";
+    private final String SELEC_DAY_ID_BOOKING = "SELECT DATEDIFF('?','?');";
 
     public BookingDAO() {
 
@@ -48,10 +46,11 @@ public class BookingDAO implements Service<Booking> {
                 Date start_date = resultSet.getDate("start_date");
                 Date end_date = resultSet.getDate("end_date");
                 int action_id = resultSet.getInt("action_id");
+                int bill_id = resultSet.getInt("isBill");
                 Home_Stay home_stay = home_stayService.getHomeById(home_id);
                 User user = userService.getUserByID(user_id);
                 Action action = actionService.getById(action_id);
-                Booking booking = new Booking(id, user, home_stay, start_date, end_date, action);
+                Booking booking = new Booking(id, user, home_stay, start_date, end_date, action,bill_id);
                 bookingList.add(booking);
             }
         } catch (SQLException e) {
@@ -70,10 +69,11 @@ public class BookingDAO implements Service<Booking> {
                 Date start_date = resultSet.getDate("start_date");
                 Date end_date = resultSet.getDate("end_date");
                 int action_id = resultSet.getInt("action_id");
+                int bill_id = resultSet.getInt("isBill_id");
                 Home_Stay home_stay = home_stayService.getHomeById(home_id);
                 User user = userService.getUserByID(user_id);
                 Action action = actionService.getById(action_id);
-                booking = new Booking(id, user, home_stay, start_date, end_date, action);
+                booking = new Booking(id, user, home_stay, start_date, end_date, action,bill_id);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -87,13 +87,26 @@ public class BookingDAO implements Service<Booking> {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_BOOKING)) {
             preparedStatement.setInt(1, booking.getHomeStay().getId());
             preparedStatement.setInt(2, booking.getUser().getId());
-            preparedStatement.setDate(3, (java.sql.Date) booking.getStart_date());
-            preparedStatement.setDate(4, (java.sql.Date) booking.getEnd_date());
+            preparedStatement.setDate(3, (Date) booking.getStart_date());
+            preparedStatement.setDate(4, (Date) booking.getEnd_date());
             preparedStatement.setInt(5, booking.getAction().getId());
+            preparedStatement.setInt(6, booking.getIsBill());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public int dateDiff(Booking booking){
+        int dateDiff=-1;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELEC_DAY_ID_BOOKING)) {
+            preparedStatement.setDate(1, (Date) booking.getEnd_date());
+            preparedStatement.setDate(2, (Date) booking.getStart_date());
+            ResultSet resultSet = preparedStatement.executeQuery();
+                dateDiff =Integer.parseInt(String.valueOf(resultSet));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return dateDiff;
     }
 
     @Override
@@ -101,10 +114,11 @@ public class BookingDAO implements Service<Booking> {
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BY_ID_BOOKING)) {
             preparedStatement.setInt(1, booking.getHomeStay().getId());
             preparedStatement.setInt(2, booking.getUser().getId());
-            preparedStatement.setDate(3, (java.sql.Date) booking.getStart_date());
-            preparedStatement.setDate(4, (java.sql.Date) booking.getEnd_date());
+            preparedStatement.setDate(3, (Date) booking.getStart_date());
+            preparedStatement.setDate(4, (Date) booking.getEnd_date());
             preparedStatement.setInt(5, booking.getAction().getId());
-            preparedStatement.setInt(6, booking.getId());
+            preparedStatement.setInt(6, booking.getIsBill());
+            preparedStatement.setInt(7, booking.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -10,72 +10,67 @@
 <html>
 <head>
     <title>Title</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
-  <h1 style="text-align: center">List Home_Stay</h1>
-    </div>
-    <div class="col-lg-2">
-      <form action="/Home_StayServlet?action=search2" method="post">
+    <h1 style="text-align: center">List Home_Stay</h1>
+</div>
+<div class="col-lg-2">
+    <form action="/BookingServlet?action=search3&&id=${homestay.id}" method="post">
         <button class="btn btn-info" type="submit">Search2</button>
-      </form>
-    </div>
-  </div>
-  <table class="table table-striped">
+
+
+
+<table class="table table-striped">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Home_Name</th>
-      <th>Address</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>User Name</th>
-      <th>Price</th>
-      <th>Avatar</th>
-      <th colspan="2" style="text-align: center">Action</th>
+        <th>ID</th>
+        <th>Home_Name</th>
+        <th>Address</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>User Name</th>
+        <th>Price</th>
+        <th>Avatar</th>
+        <th colspan="2" style="text-align: center">Action</th>
     </tr>
     </thead>
     <tbody>
-      <tr>
+    <tr>
         <td>${homestay.id}</td>
         <td>${homestay.home_name}</td>
         <td>${homestay.address}</td>
-        <td><input type="datetime-local" name="startDate" placeholder="YYYY/NN/ZZ"></td>
-        <td><input type="datetime-local" name="endDate" placeholder="YYYY/NN/ZZ"></td>
+        <td><input type="date" name="startDate" placeholder="YYYY/NN/ZZ"></td>
+        <td><input type="date" name="endDate" placeholder="YYYY/NN/ZZ"></td>
         <td>${homestay.user.username}</td>
         <td>${homestay.avatar}</td>
         <td>
-          <a class="btn btn-warning" href="/Home_StayServlet?action=update&&id=${homestay.id}">Info</a>
+            <button class="btn btn-danger" onclick="booking(${homestay.id})">Booking</button>
         </td>
         <td>
-          <button class="btn btn-danger" onclick="deleteS(${homestay.id})">Delete</button>
+            <button class="btn btn-danger" type="submit">Booking</button>
         </td>
-        <td>
-          <button class="btn btn-danger" onclick="booking(${homestay.id})">Booking</button>
-        </td>
-        <td>
-          <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${homestay.id}">Booking</a>
-        </td>
-      </tr>
-<%--    </c:forEach>--%>
+        <%--        <td>--%>
+        <%--          <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${homestay.id}">Booking</a>--%>
+        <%--        </td>--%>
+    </tr>
+    <%--    </c:forEach>--%>
     </tbody>
-  </table>
+</table>
+</form>
 </div>
+
 </body>
 <script>
-  function deleteS(id) {
-    if (confirm("Are you sure?")) {
-      window.location.href = `http://localhost:8080/Home_StayServlet?action=delete&&id=` + id
+    function booking(id) {
+        if (confirm("Are you sure?")) {
+            window.location.href = `http://localhost:8080/BookingServlet?action=booking2&&id=` + id
+        }
     }
-  }function booking(id){
-    if (confirm("Are you sure?")){
-      window.location.href = `http://localhost:8080/BookingServlet?action=booking2&&id=` + id
-    }
-  }
 </script>
 </html>

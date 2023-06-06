@@ -25,6 +25,10 @@ public class RoleService implements Service<Role> {
     public Role getById(int id){
       return roleDAO.getById(id);
     }
+    public boolean checkById(int id){
+        Role role = roleDAO.getById(id);
+        return  role != null;
+    }
 
     @Override
     public List<Role> getList() {

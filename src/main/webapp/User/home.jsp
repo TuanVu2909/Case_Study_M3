@@ -77,6 +77,7 @@
         if (confirm("Are you sure?")) {
             window.location.href = `http://localhost:8080/UserServlet?action=delete&&id=` + id
         }
+
     }
 </script>
 </html>

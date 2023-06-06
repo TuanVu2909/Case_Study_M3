@@ -2,6 +2,7 @@ package controller;
 
 import model.Role;
 import model.User;
+import model.Validate;
 import service.RoleService;
 import service.UserService;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
     private final RoleService roleService = RoleService.getInstance();
+    private final Validate validate = Validate.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -78,55 +80,38 @@ public class UserServlet extends HttpServlet {
     }
 
     private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String avatar = request.getParameter("avatar");
-        String full_name = request.getParameter("full_name");
-        String address = request.getParameter("address");
-        String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("role"));
-        Role role = roleService.getById(roleId);
-        if (role != null) {
-            User user = new User(username, password, avatar, full_name, address, phone, role);
-            userService.create(user);
-            response.sendRedirect("/UserServlet");
+
+        if (roleService.checkById(roleId)) {
+             userService.save(request);
+                response.sendRedirect("/UserServlet");
+
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
-
     private void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        User user = userService.getUserByID(id);
-        if (user != null) {
+        if (userService.checkId(id)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/update.jsp");
-            request.setAttribute("user", user);
+            request.setAttribute("user", userService.getUserByID(id));
             request.setAttribute("role", roleService.getList());
             requestDispatcher.forward(request, response);
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
-
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String avatar = request.getParameter("avatar");
-        String full_name = request.getParameter("full_name");
-        String address = request.getParameter("address");
-        String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("role"));
-        Role role = roleService.getById(roleId);
-        User user = new User(id, username, password, avatar, full_name, address, phone, role);
-        if (user != null) {
-            userService.update(user);
+
+        if (userService.checkId(id)&&roleService.checkById(roleId)) {
+           userService.save(request);
             response.sendRedirect("/UserServlet");
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
-
     private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         userService.deleteById(id);

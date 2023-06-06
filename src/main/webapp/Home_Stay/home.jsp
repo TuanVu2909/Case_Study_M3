@@ -34,6 +34,12 @@
             </form>
         </div>
         <div class="col-lg-2">
+            <form action="/BookingServlet?action=search4" method="post">
+                <input type="text" name="bookinglist">
+                <button class="btn btn-info" type="submit">Booking List</button>
+            </form>
+        </div>
+        <div class="col-lg-2">
             <form action="/Home_StayServlet?action=search2" method="post">
                 <button class="btn btn-info" type="submit">Search2</button>
             </form>

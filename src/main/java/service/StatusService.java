@@ -31,12 +31,17 @@ public class StatusService implements Service<Status> {
     public Status getById(int id){
         return statusDAO.getById(id);
     }
+    public boolean checkID(int id){
+        Status status = statusDAO.getById(id);
+        return  status != null;
+    }
 
 
     @Override
     public List<Status> getList() {
         return statusDAO.getStatusList();
     }
+
 
     @Override
     public void create(Status status) {

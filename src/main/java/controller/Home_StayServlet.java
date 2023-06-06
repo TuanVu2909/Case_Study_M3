@@ -70,34 +70,22 @@ public class Home_StayServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/home.jsp");
             requestDispatcher.forward(request, response);
         }
-
         private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setAttribute("user", userService.getList());
             request.setAttribute("status", statusService.getList());
-
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/create.jsp");
             requestDispatcher.forward(request, response);
         }
-
         private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String home_name = request.getParameter("home_name");
-            String address = request.getParameter("address");
-            String depict = request.getParameter("depict");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String  avatar = request.getParameter("avatar");
             int admin_id = Integer.parseInt(request.getParameter("admin_id"));
             int status_id = Integer.parseInt(request.getParameter("status_id"));
-            User user = userService.getUserByID(admin_id) ;
-            Status status = statusService.getById(status_id);
-            if (user != null) {
-                Home_Stay homeStay = new Home_Stay(home_name,address,depict,price,avatar,user,status);
-                home_stayService.create(homeStay);
+            if (userService.checkId(admin_id)&&statusService.checkID(status_id)) {
+               home_stayService.save(request);
                 response.sendRedirect("/Home_StayServlet");
             } else {
                 response.sendRedirect("/404.jsp");
             }
         }
-
         private void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             int id = Integer.parseInt(request.getParameter("id"));
             Home_Stay homeStay = home_stayService.getHomeById(id);
@@ -114,18 +102,11 @@ public class Home_StayServlet extends HttpServlet {
 
         private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             int id = Integer.parseInt(request.getParameter("id"));
-            String home_name = request.getParameter("home_name");
-            String address = request.getParameter("address");
-            String depict = request.getParameter("depict");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String  avatar = request.getParameter("avatar");
             int admin_id = Integer.parseInt(request.getParameter("admin_id"));
             int status_id = Integer.parseInt(request.getParameter("status_id"));
-            User user = userService.getUserByID(admin_id) ;
-            Status status = statusService.getById(status_id);
-            Home_Stay homeStay = new Home_Stay(id,home_name,address,depict,price,avatar,user,status);
-            if (user != null){
-                home_stayService.update(homeStay);
+
+            if (userService.checkId(admin_id)&&home_stayService.checkID(id)&& statusService.checkID(status_id)){
+              home_stayService.save(request);
                 response.sendRedirect("/Home_StayServlet");
             } else {
                 response.sendRedirect("/404.jsp");

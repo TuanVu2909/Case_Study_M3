@@ -22,6 +22,14 @@ public class Booking {
     public Booking() {
     }
 
+    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, boolean action) {
+        this.user = user;
+        this.homeStay = homeStay;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.action = action;
+    }
+
     public int getId() {
         return id;
     }
@@ -46,7 +54,10 @@ public class Booking {
         this.homeStay = homeStay;
     }
 
+//<<<<<<< HEAD
 
+//=======
+//>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
 
     public Date getStart_date() {
         return start_date;

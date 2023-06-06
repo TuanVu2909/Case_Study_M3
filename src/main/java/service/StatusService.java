@@ -1,5 +1,7 @@
 package service;
-
+import DAO.StatusDAO;
+import model.Role;
+import model.Status;
 
 import DAO.StatusDAO;
 import model.Role;
@@ -26,7 +28,6 @@ public class StatusService implements Service<Status> {
         }
         return statusService;
     }
-
     public Status getById(int id){
         return statusDAO.getById(id);
     }

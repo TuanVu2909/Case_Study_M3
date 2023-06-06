@@ -19,91 +19,6 @@
 
 </head>
 <body>
-<%--<div>--%>
-<%--    <div id="header" class="header">--%>
-<%--        <div>--%>
-<%--            <a href="#Logo">Logo</a>--%>
-<%--        </div>--%>
-
-<%--        <div>--%>
-<%--            <a class="active" href="#home">Home</a>--%>
-<%--        </div>--%>
-<%--<div>--%>
-<%--    <input type="text" placeholder="Search..."/>--%>
-<%--    <button class="btn btn-primary" type="button">--%>
-<%--        <i class="bi bi-search"></i>--%>
-<%--    </button>--%>
-<%--</div>--%>
-<%--        <div id="menuTop" class="aLogin">--%>
-<%--            <a href="#login">Login</a>--%>
-<%--            <a href="/UserServlet?action=create">register</a>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-<%--    <div id="menu" class="menu">--%>
-<%--        <div>--%>
-<%--            <a class="active" href="#menu1">menu1</a>--%>
-<%--        </div>--%>
-
-<%--        <div>--%>
-<%--            <a class="active" href="#menu2">menu2</a>--%>
-<%--        </div>--%>
-
-<%--        <div>--%>
-<%--            <a class="active" href="#menu3">menu3</a>--%>
-<%--        </div>--%>
-
-<%--        <div>--%>
-<%--            <a class="active" href="#menu4">menu4</a>--%>
-<%--        </div>--%>
-
-<%--        <div>--%>
-<%--            <a class="active" href="#menu5">menu5</a>--%>
-<%--        </div>--%>
-
-<%--    </div>--%>
-
-<%--    <div id="main_content">--%>
-<%--        <div id="left_sidebar">--%>
-<%--            Left sidebar--%>
-<%--        </div>--%>
-
-<%--        <div id="content">--%>
-
-<%--            <form action="">--%>
-<%--                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/283257417.jpg?k=e710ddf183c9d1f6d2752f9c4b19ed4eafb94b59b0b76d19ed4a2358a4f37db5&o=&hp=1" alt="My image" style="width: 300px; height: auto;"><br>--%>
-<%--                <p>Name</p>--%>
-<%--                <p>Address</p>--%>
-<%--                <p>Price</p>--%>
-<%--                <button type="submit">Book</button>--%>
-<%--            </form>--%>
-
-<%--            <form action="">--%>
-<%--                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/283257417.jpg?k=e710ddf183c9d1f6d2752f9c4b19ed4eafb94b59b0b76d19ed4a2358a4f37db5&o=&hp=1" alt="My image" style="width: 300px; height: auto;"><br>--%>
-<%--                <p>Name</p>--%>
-<%--                <p>Address</p>--%>
-<%--                <p>Price</p>--%>
-<%--                <button type="submit">Book</button>--%>
-<%--            </form>--%>
-
-<%--            <form action="">--%>
-<%--                <p>Name</p>--%>
-<%--                <p>Address</p>--%>
-<%--                <p>Price</p>--%>
-<%--                <button type="submit">Book</button>--%>
-<%--            </form>--%>
-
-<%--        </div>--%>
-<%--        <div style="clear: both"></div>--%>
-<%--    </div>--%>
-<%--    </div>--%>
-
-<%--    <div id="footer">--%>
-<%--        Về chúng tôi--%>
-<%--        Liên hệ--%>
-<%--    </div>--%>
-<%--</div>--%>
-
 
 <div class="container">
 
@@ -123,9 +38,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Home</a>
-<%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--            <span class="navbar-toggler-icon"></span>--%>
-<%--        </button>--%>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -343,5 +258,18 @@
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
 </script>
 
+=======
+<form style="width: 600px; margin: auto"
+      action="/UserServlet?action=login">
+    <div class="row">
+    <div class="col-lg-5">
+    <a class="btn btn-secondary" href="/Login/login.jsp">Login</a>
+    </div>
+    <div class="col-lg-5">
+        <a class="btn btn-secondary" href="/UserServlet">Back to Menu</a>
+    </div>
+    </div>
+</form>
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
 </body>
 </html>

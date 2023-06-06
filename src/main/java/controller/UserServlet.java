@@ -15,6 +15,7 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
     private final RoleService roleService = RoleService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
@@ -31,6 +32,9 @@ public class UserServlet extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
+//            case "login":
+//                loginGet(request, response);
+//                break;
             default:
                 findAdd(request, response);
         }
@@ -49,11 +53,21 @@ public class UserServlet extends HttpServlet {
             case "update":
                 updatePost(request, response);
                 break;
+<<<<<<< HEAD
 //            case "search":
 //                search(request, response);
 //                break;
+=======
+            case "change":
+                changePot(request, response);
+                break;
+            case "login":
+                loginPot(request, response);
+                break;
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
         }
     }
+
     private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("user", userService.getList());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
@@ -76,7 +90,7 @@ public class UserServlet extends HttpServlet {
         int roleId = Integer.parseInt(request.getParameter("role"));
         Role role = roleService.getById(roleId);
         if (role != null) {
-            User user = new User( username, password, avatar, full_name, address,phone,role);
+            User user = new User(username, password, avatar, full_name, address, phone, role);
             userService.create(user);
             response.sendRedirect("/UserServlet");
         } else {
@@ -107,11 +121,11 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("role"));
         Role role = roleService.getById(roleId);
-        User user = new User(id,username,password,avatar,full_name,address,phone,role);
+        User user = new User(id, username, password, avatar, full_name, address, phone, role);
         if (user != null) {
             userService.update(new User(id,username,password,avatar,full_name,address,phone,role));
             response.sendRedirect("/UserServlet");
-        }else  {
+        } else {
             response.sendRedirect("/404.jsp");
         }
     }
@@ -121,7 +135,8 @@ public class UserServlet extends HttpServlet {
         userService.deleteById(id);
         response.sendRedirect("/UserServlet");
     }
-//
+
+    //
 //    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String search = request.getParameter("search");
 //        List<Student> students = studentService.searchByName(search);
@@ -129,7 +144,7 @@ public class UserServlet extends HttpServlet {
 //        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/student/home.jsp");
 //        requestDispatcher.forward(request, response);
 //    }
-    private void changeGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private void changeGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserByID(id);
         if (user != null) {
@@ -142,7 +157,8 @@ public class UserServlet extends HttpServlet {
         }
 
     }
-    private void changePot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    private void changePot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String username = request.getParameter("username");
         String newPassword = request.getParameter("newPassword");
@@ -152,12 +168,42 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("role"));
         Role role = roleService.getById(roleId);
-        User user = new User(id,username,newPassword,avatar,full_name,address,phone,role);
+        User user = new User(id, username, newPassword, avatar, full_name, address, phone, role);
         if (user != null) {
             userService.update(user);
             response.sendRedirect("/UserServlet");
-        }else  {
+        } else {
             response.sendRedirect("/404.jsp");
+        }
+    }
+
+//    private void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        response.sendRedirect("/Login/login.jsp");
+//    }
+
+    private void loginPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        List<User> userList = userService.getList();
+        for (User u : userList) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                if (u.getRole().getId() == 1) {
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
+                    request.setAttribute("userLogin", u);
+                    request.setAttribute("user", userService.getList());
+                    requestDispatcher.forward(request, response);
+                    break;
+                }else {
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login/user.jsp");
+                    request.setAttribute("userLogin", u);
+                    request.setAttribute("user", userService.getList());
+                    requestDispatcher.forward(request, response);
+                    break;
+                }
+            }else {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/404.jsp");
+                requestDispatcher.forward(request, response);
+            }
         }
     }
 }

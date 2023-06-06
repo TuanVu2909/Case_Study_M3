@@ -99,6 +99,7 @@ public class UserDAO {
 
         return user;
     }
+
     public void deleteById(int id){
         try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_USER)){
             preparedStatement.setInt(1,id);

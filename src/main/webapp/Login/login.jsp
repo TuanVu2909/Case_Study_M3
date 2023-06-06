@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Duc
   Date: 03/06/2023
-  Time: 9:25 SA
+  Time: 6:24 CH
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,32 +17,23 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<<<<<<< HEAD
-
-
-=======
+<h1 style="text-align: center">Login</h1>
 <form style="width: 600px; margin: auto"
-      action="/UserServlet?action=login">
-    <div class="row">
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/Login/login.jsp">BookingManage</a>
-        </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">Search</a>
-        </div>
+      action="/UserServlet?action=login" method="post">
+    <div class="mb-3">
+        <label for="username" class="form-label">UserName </label>
+        <input type="text" class="form-control" id="username" name="username">
     </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">ViewAll</a>
+    <div class="mb-3">
+        <div class="mb-3">
+            <label for="password" class="form-label">Password </label>
+            <input type="text" class="form-control" id="password" name="password">
         </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">Thue Nha</a>
-        </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">User History</a>
-        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="btn btn-secondary" href="/UserServlet?action=create">Register</a>
     </div>
+
 </form>
->>>>>>> dev-duc
+</div>
 </body>
 </html>

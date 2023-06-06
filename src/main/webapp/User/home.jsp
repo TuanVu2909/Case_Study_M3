@@ -25,7 +25,7 @@
                 new user</a>
         </div>
         <div class="col-lg-7">
-            <a class="btn btn-primary" style="text-decoration: none; color: white" href="/classes">Home Classes</a>
+            <a class="btn btn-primary" style="text-decoration: none; color: white" >${userLogin.username}</a>
         </div>
         <div class="col-lg-3">
             <form action="/UserServlet?action=search" method="post">

@@ -2,6 +2,7 @@ package service;
 
 import DAO.UserDAO;
 import model.User;
+import model.Validate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ public class UserService implements Service<User> {
     private final List<User> userList;
     private static UserService userService;
     private final UserDAO userDAO;
+    private final Validate validate = Validate.getInstance();
 
     private UserService() {
         userList = new ArrayList<>();

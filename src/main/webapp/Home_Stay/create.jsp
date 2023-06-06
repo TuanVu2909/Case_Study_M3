@@ -41,6 +41,19 @@
             <input type="text" class="form-control" name="avatar" id="avatar" placeholder="Enter avatar">
         </div>
         <div class="mb-3">
+<<<<<<< HEAD
+=======
+            <label for="admin_id" class="form-label">Status</label>
+            <select class="form-select" id="status_id" name="status_id"
+                    aria-label="Default select example">
+                <option selected>--- Choice Status---</option>
+                <c:forEach items="${status}" var="s">
+                    <option value="${s.id}">${s.name}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="mb-3">
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
             <label for="admin_id" class="form-label">admin_id</label>
             <select class="form-select" id="admin_id" name="admin_id"
                     aria-label="Default select example">

@@ -8,8 +8,9 @@ public class Home_Stay {
     private double price;
     private String avatar;
     private User user;
+    private Status status;
 
-    public Home_Stay(int id, String home_name, String address, String depict, double price, String avatar, User user) {
+    public Home_Stay(int id, String home_name, String address, String depict, double price, String avatar, User user, Status status) {
         this.id = id;
         this.home_name = home_name;
         this.address = address;
@@ -17,6 +18,7 @@ public class Home_Stay {
         this.price = price;
         this.avatar = avatar;
         this.user = user;
+        this.status = status;
     }
 
     public Home_Stay(String home_name, String address, String depict, double price, String avatar, User user) {
@@ -29,6 +31,24 @@ public class Home_Stay {
     }
 
     public Home_Stay() {
+    }
+
+    public Home_Stay(String home_name, String address, String depict, double price, String avatar, User user, Status status) {
+        this.home_name = home_name;
+        this.address = address;
+        this.depict = depict;
+        this.price = price;
+        this.avatar = avatar;
+        this.user = user;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getId() {

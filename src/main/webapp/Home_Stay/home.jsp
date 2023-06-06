@@ -24,15 +24,30 @@
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/Home_StayServlet?action=create">Create
                 new Home_Stay</a>
         </div>
+<<<<<<< HEAD
         <div class="col-lg-7">
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/UserServlet">Back Home User</a>
         </div>
         <div class="col-lg-3">
+=======
+        <div class="col-lg-6">
+            <a class="btn btn-primary" style="text-decoration: none; color: white" href="/UserServlet">Back Home User</a>
+        </div>
+        <div class="col-lg-2">
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
             <form action="/Home_StayServlet?action=search" method="post">
                 <input type="text" name="search">
                 <button class="btn btn-info" type="submit">Search</button>
             </form>
         </div>
+<<<<<<< HEAD
+=======
+        <div class="col-lg-2">
+            <form action="/Home_StayServlet?action=search2" method="post">
+                <button class="btn btn-info" type="submit">Search2</button>
+            </form>
+        </div>
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
     </div>
     <table class="table table-striped">
         <thead>
@@ -43,6 +58,10 @@
             <th>Depict</th>
             <th>Price</th>
             <th>Avatar</th>
+<<<<<<< HEAD
+=======
+            <th>Status</th>
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
             <th>Admin</th>
             <th colspan="2" style="text-align: center">Action</th>
         </tr>
@@ -57,6 +76,10 @@
                 <td>${h.depict}</td>
                 <td>${h.price}</td>
                 <td>${h.avatar}</td>
+<<<<<<< HEAD
+=======
+                <td>${h.status.name}</td>
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
                 <td>${h.user.username}</td>
                 <td>
                     <a class="btn btn-warning" href="/Home_StayServlet?action=update&&id=${h.id}">Info</a>

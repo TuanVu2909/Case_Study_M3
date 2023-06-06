@@ -54,6 +54,12 @@ public class Home_StayService implements Service<Home_Stay> {
     public List<Home_Stay> searchName(String name){
         return home_stayDAO.searchName(name);
     }
+<<<<<<< HEAD
+=======
+    public List<Home_Stay> searchByStatus2(){
+        return home_stayDAO.getStatus2();
+    }
+>>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
 
     @Override
     public void displayALL() {

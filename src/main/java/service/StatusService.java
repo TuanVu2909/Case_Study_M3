@@ -30,6 +30,7 @@ public class StatusService implements Service<Status> {
     public Status getById(int id){
         return statusDAO.getById(id);
     }
+
     @Override
     public List<Status> getList() {
         return statusDAO.getStatusList();

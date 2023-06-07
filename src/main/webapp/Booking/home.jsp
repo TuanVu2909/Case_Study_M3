@@ -39,31 +39,65 @@
             <th>Home Name</th>
             <th>Day</th>
             <th>Price</th>
+            <th>Total price</th>
             <th colspan="2" style="text-align: center">Action</th>
         </tr>
         </thead>
-        <tbody>
-        <c:forEach items="${booking},${date}" var="b,d">
-            <tr>
-                <td>${b.id}</td>
-                <td>${b.homeStay.avatar} </td>
-                <td>${b.homeStay.home_name}</td>
-                <td>${d}</td>
-                <td>${b.homeStay.price}</td>
-                <td>
-                    <button class="btn btn-danger" onclick="total(${d})">Total</button>
-                </td>
-            </tr>
-        </c:forEach>
 
+        <jsp:useBean id="booking" scope="request" type="java.util.List"/>
+        <c:if test="${user.role_id == 2}">
+            <c:forEach items="${booking}" var="b">
+
+                <c:if test="${b.isBill == 1}">
+                    <tr>
+                        <td>${b.id}</td>
+                        <td>${b.homeStay.avatar} </td>
+                        <td>${b.homeStay.home_name}</td>
+                        <td>${b.totalDay}</td>
+                        <td>${b.homeStay.price}</td>
+                        <td>${b.totalPrice}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>
+                            <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </c:if>
+        <c:if test="${user.role_id == 1}">
+            <c:forEach items="${booking}" var="b">
+                <c:if test="${b.isBill ==0}">
+                    <tr>
+                        <td>${b.id}</td>
+                        <td>${b.homeStay.avatar} </td>
+                        <td>${b.homeStay.home_name}</td>
+                        <td>${b.totalDay}</td>
+                        <td>${b.homeStay.price}</td>
+                        <td>${b.totalPrice}</td>
+
+                        <td>
+                                <%--                       <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>--%>
+<%--                                                        <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>--%>
+                        </td>
+
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </c:if>
         </tbody>
     </table>
 </div>
 </body>
 <script>
-    function total(id) {
+    function pay(id) {
         if (confirm("Are you sure?")) {
-            window.location.href = `http://localhost:8080/Home_StayServlet?action=delete&&id=` + id
+            window.location.href = `http://localhost:8080/BookingServlet?action=pay&&id=` + id
+        }
+    }
+
+    function cancel(id) {
+        if (confirm("Are you sure?")) {
+            window.location.href = `http://localhost:8080/BookingServlet?action=cancel&&id=` + id
         }
     }
 </script>

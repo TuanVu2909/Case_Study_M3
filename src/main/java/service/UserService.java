@@ -62,7 +62,7 @@ public class UserService implements Service<User> {
     }
 
     @Override
-    public List<User> getList() {
+    public List<User> getList(BookingService bookingService) {
         return userDAO.getUserList();
     }
 

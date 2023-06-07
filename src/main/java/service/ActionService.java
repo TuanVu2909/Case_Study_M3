@@ -30,7 +30,7 @@ public class ActionService  implements Service<Action> {
 
 
     @Override
-    public List<Action> getList() {
+    public List<Action> getList(BookingService bookingService) {
         return actionDAO.getActionList();
     }
 

@@ -30,7 +30,7 @@ public class Home_StayService implements Service<Home_Stay> {
     }
 
     @Override
-    public List<Home_Stay> getList() {
+    public List<Home_Stay> getList(BookingService bookingService) {
         return home_stayDAO.getList();
     }
     public Home_Stay getHomeById(int id){

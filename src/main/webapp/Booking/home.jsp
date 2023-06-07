@@ -17,32 +17,88 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<<<<<<< HEAD
 
-
-=======
-<form style="width: 600px; margin: auto"
-      action="/UserServlet?action=login">
+<div class="container">
+    <h1 style="text-align: center">List Home_Stay</h1>
     <div class="row">
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/Login/login.jsp">BookingManage</a>
+        <div class="col-lg-2">
+            <a class="btn btn-primary" style="text-decoration: none; color: white"
+               href="/Home_StayServlet?action=create">Back
+                to Home</a>
         </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">Search</a>
+        <div class="col-lg-6">
+            <a class="btn btn-primary" style="text-decoration: none; color: white" href="/Home_StayServlet">Back Home
+                Booking</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">ViewAll</a>
-        </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">Thue Nha</a>
-        </div>
-        <div class="col-lg-5">
-            <a class="btn btn-secondary" href="/UserServlet">User History</a>
-        </div>
-    </div>
-</form>
->>>>>>> dev-duc
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Avatar</th>
+            <th>Home Name</th>
+            <th>Day</th>
+            <th>Price</th>
+            <th>Total price</th>
+            <th colspan="2" style="text-align: center">Action</th>
+        </tr>
+        </thead>
+
+        <jsp:useBean id="booking" scope="request" type="java.util.List"/>
+        <c:if test="${user.role_id == 2}">
+            <c:forEach items="${booking}" var="b">
+
+                <c:if test="${b.isBill == 1}">
+                    <tr>
+                        <td>${b.id}</td>
+                        <td>${b.homeStay.avatar} </td>
+                        <td>${b.homeStay.home_name}</td>
+                        <td>${b.totalDay}</td>
+                        <td>${b.homeStay.price}</td>
+                        <td>${b.totalPrice}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>
+                            <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </c:if>
+        <c:if test="${user.role_id == 1}">
+            <c:forEach items="${booking}" var="b">
+                <c:if test="${b.isBill ==0}">
+                    <tr>
+                        <td>${b.id}</td>
+                        <td>${b.homeStay.avatar} </td>
+                        <td>${b.homeStay.home_name}</td>
+                        <td>${b.totalDay}</td>
+                        <td>${b.homeStay.price}</td>
+                        <td>${b.totalPrice}</td>
+
+                        <td>
+                                <%--                       <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>--%>
+<%--                                                        <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>--%>
+                        </td>
+
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </c:if>
+        </tbody>
+    </table>
+</div>
 </body>
+<script>
+    function pay(id) {
+        if (confirm("Are you sure?")) {
+            window.location.href = `http://localhost:8080/BookingServlet?action=pay&&id=` + id
+        }
+    }
+
+    function cancel(id) {
+        if (confirm("Are you sure?")) {
+            window.location.href = `http://localhost:8080/BookingServlet?action=cancel&&id=` + id
+        }
+    }
+</script>
 </html>

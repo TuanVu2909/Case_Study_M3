@@ -9,26 +9,44 @@ public class Booking {
 
     private Date start_date;
     private Date end_date;
-    private boolean action;
+    private Action action;
+    private int isBill;
 
-    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, boolean action) {
+    private int totalDay;
+    private double totalPrice;
+
+    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, Action action, int isBill, int totalDay, double totalPrice) {
         this.id = id;
         this.user = user;
         this.homeStay = homeStay;
         this.start_date = start_date;
         this.end_date = end_date;
         this.action = action;
+        this.isBill = isBill;
+        this.totalDay = totalDay;
+        this.totalPrice = totalPrice;
     }
 
-    public Booking() {
-    }
-
-    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, boolean action) {
+    public Booking(int id, User user, Home_Stay homeStay, Date start_date, Date end_date, Action action, int isBill) {
+        this.id = id;
         this.user = user;
         this.homeStay = homeStay;
         this.start_date = start_date;
         this.end_date = end_date;
         this.action = action;
+        this.isBill = isBill;
+    }
+
+    public Booking() {
+    }
+
+    public Booking(User user, Home_Stay homeStay, Date start_date, Date end_date, Action action, int isBill) {
+        this.user = user;
+        this.homeStay = homeStay;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.action = action;
+        this.isBill = isBill;
     }
 
     public int getId() {
@@ -55,7 +73,6 @@ public class Booking {
         this.homeStay = homeStay;
     }
 
-
     public Date getStart_date() {
         return start_date;
     }
@@ -72,11 +89,36 @@ public class Booking {
         this.end_date = end_date;
     }
 
-    public boolean isAction() {
+    public int getIsBill() {
+        return isBill;
+    }
+
+    public void setIsBill(int isBill) {
+        this.isBill = isBill;
+    }
+
+    public Action getAction() {
         return action;
     }
 
-    public void setAction(boolean action) {
+    public void setAction(Action action) {
         this.action = action;
+    }
+
+
+    public int getTotalDay() {
+        return totalDay;
+    }
+
+    public void setTotalDay(int totalDay) {
+        this.totalDay = totalDay;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

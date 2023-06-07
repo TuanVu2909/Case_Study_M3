@@ -43,6 +43,12 @@
 <<<<<<< HEAD
 =======
         <div class="col-lg-2">
+            <form action="/BookingServlet?action=search4" method="post">
+                <input type="text" name="bookinglist">
+                <button class="btn btn-info" type="submit">Booking List</button>
+            </form>
+        </div>
+        <div class="col-lg-2">
             <form action="/Home_StayServlet?action=search2" method="post">
                 <button class="btn btn-info" type="submit">Search2</button>
             </form>
@@ -61,8 +67,12 @@
 <<<<<<< HEAD
 =======
             <th>Status</th>
+<<<<<<< HEAD
 >>>>>>> 96410e93dc257137265f93baa71695a8fb76565c
             <th>Admin</th>
+=======
+            <th>User</th>
+>>>>>>> c2516486fe769d289c796308b6771354bb3dcb47
             <th colspan="2" style="text-align: center">Action</th>
         </tr>
         </thead>
@@ -87,6 +97,10 @@
                 <td>
                     <button class="btn btn-danger" onclick="deleteS(${h.id})">Delete</button>
                 </td>
+
+                <td>
+                    <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${h.id}">Booking</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -99,5 +113,6 @@
             window.location.href = `http://localhost:8080/Home_StayServlet?action=delete&&id=` + id
         }
     }
+
 </script>
 </html>

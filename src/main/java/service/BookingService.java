@@ -34,14 +34,16 @@ public class BookingService implements Service<Booking> {
     }
 
     @Override
-    public List<Booking> getList() {
-        return
-                bookingDAO.getList();
+    public List<Booking> getList(BookingService bookingService) {
+        return bookingDAO.getList(bookingService);
     }
 
     @Override
     public void create(Booking booking) {
         bookingDAO.create(booking);
+    }
+    public int dateDiff(Booking booking){
+      return   bookingDAO.dateDiff(booking);
     }
 
     @Override

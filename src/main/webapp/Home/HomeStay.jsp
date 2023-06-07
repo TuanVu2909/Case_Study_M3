@@ -49,7 +49,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <c:if test="${sessionScope.login ==null}">
+            <c:if test="${sessionScope.username ==null}">
                 <div>
                     <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
                 </div>
@@ -58,9 +58,9 @@
                     <a class="btn btn-outline-success register-btn" href="/User/Register.jsp">Register</a>
                 </div>
             </c:if>
-            <c:if test="${sessionScope.login !=null}">
+            <c:if test="${sessionScope.username !=null}">
                 <div>
-                    <p>${sessionScope.username}</p>
+                    <p>${sessionScope.username.username}</p>
                     <a class="btn btn-outline-success register-btn" href="/UserServlet?action=logout">Logout</a>
                 </div>
             </c:if>

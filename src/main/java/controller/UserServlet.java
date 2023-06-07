@@ -153,7 +153,7 @@ public class UserServlet extends HttpServlet {
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("/Home/HomeStay.jsp");
+        response.sendRedirect("/Home_StayServlet");
     }
 
     private void loginPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -164,20 +164,14 @@ public class UserServlet extends HttpServlet {
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
-                  session.setAttribute("username",u.getUsername());
-                  session.setAttribute("roleId",u.getRole().getId());
+                  session.setAttribute("username",u);
                   session.setAttribute("login",u.getRole().getId());
-                    request.setAttribute("user", userService.getList());
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
-                    requestDispatcher.forward(request, response);
+                    response.sendRedirect("/Home_StayServlet");
                     break;
                 }else {
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
-                    session.setAttribute("username",u.getUsername());
-                    session.setAttribute("roleId",u.getRole().getId());
+                    session.setAttribute("username",u);
                     session.setAttribute("login",u.getRole().getId());
-                    request.setAttribute("user", userService.getList());
-                    requestDispatcher.forward(request, response);
+                    response.sendRedirect("/Home_StayServlet");
                     break;
                 }
             }else {

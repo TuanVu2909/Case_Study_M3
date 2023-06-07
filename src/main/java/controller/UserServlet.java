@@ -42,9 +42,6 @@ public class UserServlet extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
-//            case "login":
-//                loginGet(request, response);
-//                break;
             default:
                 findAdd(request, response);
         }

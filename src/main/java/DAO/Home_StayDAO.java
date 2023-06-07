@@ -131,7 +131,7 @@ public class Home_StayDAO {
 
     public void deleteById(int id) {
         try(PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_HOMESTAY)){
-            preparedStatement.setLong(1,id);
+            preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

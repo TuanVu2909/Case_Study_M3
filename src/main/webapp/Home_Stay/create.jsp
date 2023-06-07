@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align: center">Form create HomeStay</h1>
+    <h1 style="text-align: center"> Create HomeStay</h1>
     <form style="width: 600px; margin: auto" action="/Home_StayServlet?action=create" method="post">
         <div class="mb-3">
             <label for="home_name" class="form-label">HomeName</label>
@@ -62,7 +62,7 @@
         </div>
         <div class="mb-3">
             <button class="btn btn-primary" type="submit">Create</button>
-            <a class="btn btn-secondary" href="/Home_StayServlet">Back to HomeStay</a>
+            <a class="btn btn-secondary" href="/Home_StayServlet">Back to Home</a>
         </div>
     </form>
 </div>

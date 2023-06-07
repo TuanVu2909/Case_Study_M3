@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align: center">Form update user</h1>
+    <h1 style="text-align: center"> Update </h1>
     <form style="width: 600px; margin: auto"
           action="/UserServlet?action=update&&id=${user.id}&&role=${user.role.id}&&password=${user.password}" method="post">
         <div class="mb-3">

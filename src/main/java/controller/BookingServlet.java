@@ -48,6 +48,16 @@ public class BookingServlet extends HttpServlet {
                 break;
             case "cancel":
                 cancel(request,response);
+                break;
+            case "cancelUser":
+                cancelUser(request,response);
+                break;
+            case "bookingAdmin":
+                bookingAdmin(request,response);
+                break;
+            case "bookingUser":
+                bookingUser(request,response);
+                break;
             default:
                 findAdd(request, response);
         }
@@ -87,6 +97,28 @@ public class BookingServlet extends HttpServlet {
     private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("booking", bookingService.getList(bookingService));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        requestDispatcher.forward(request, response);
+    }
+    private void bookingAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("booking", bookingService.getList(bookingService));
+        request.setAttribute("bookingId", id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        requestDispatcher.forward(request, response);
+    }
+    private void bookingUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+       User user = userService.getUserByID(id);
+        List<Booking> bookingList = bookingService.getList(bookingService);
+        List<Booking> bookingListUser = new ArrayList<>();
+        for (Booking b : bookingList) {
+            if(b.getUser().getId() == user.getId()){
+                bookingListUser.add(b);
+            }
+        }
+        request.setAttribute("booking", bookingListUser);
+        request.setAttribute("bookingId", 2);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -159,7 +191,8 @@ public class BookingServlet extends HttpServlet {
         Booking booking =new Booking(user,home_stay,start_date,end_date,action,isBill);
         bookingService.create(booking);
         request.setAttribute("booking", bookingService.getList(bookingService));
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        request.setAttribute("home_stay", home_stayService.getList(bookingService));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
         requestDispatcher.forward(request, response);
     }
     private void search4(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -179,15 +212,26 @@ public class BookingServlet extends HttpServlet {
         Booking booking = bookingService.getBookingById(id);
         booking.setIsBill(0);
         bookingService.update(booking);
-        response.sendRedirect("/BookingServlet");
+        request.setAttribute("booking", bookingService.getList(bookingService));
+        request.setAttribute("bookingId", 2);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        requestDispatcher.forward(request, response);
 
     }
 
     private void cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         bookingService.deleteById(id);
-
         request.setAttribute("booking", bookingService.getList(bookingService));
+        request.setAttribute("bookingId", 1);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        requestDispatcher.forward(request, response);
+    }
+    private void cancelUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        bookingService.deleteById(id);
+        request.setAttribute("booking", bookingService.getList(bookingService));
+        request.setAttribute("bookingId", 2);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }

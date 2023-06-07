@@ -19,7 +19,7 @@
 <body>
 
 <div class="container">
-    <h1 style="text-align: center">List Home_Stay</h1>
+    <h1 style="text-align: center">List Booking</h1>
     <div class="row">
         <div class="col-lg-6">
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/Home_StayServlet">Back Home
@@ -40,9 +40,8 @@
         </thead>
 
         <jsp:useBean id="booking" scope="request" type="java.util.List"/>
+<c:if test="${bookingId == 1}">
             <c:forEach items="${booking}" var="b">
-
-                <c:if test="${b.isBill == 1}">
                     <tr>
                         <td>${b.id}</td>
                         <td>${b.homeStay.avatar} </td>
@@ -50,25 +49,34 @@
                         <td>${b.totalDay}</td>
                         <td>${b.homeStay.price}</td>
                         <td>${b.totalPrice}</td>
+                        <c:if test="${b.isBill == 1}">
                         <td>
-                            <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>
                             <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>
                         </td>
+                        </c:if>
                     </tr>
-                </c:if>
+
             </c:forEach>
-<%--            <c:forEach items="${booking}" var="b">--%>
-<%--                <c:if test="${b.isBill ==0}">--%>
-<%--                    <tr>--%>
-<%--                        <td>${b.id}</td>--%>
-<%--                        <td>${b.homeStay.avatar} </td>--%>
-<%--                        <td>${b.homeStay.home_name}</td>--%>
-<%--                        <td>${b.totalDay}</td>--%>
-<%--                        <td>${b.homeStay.price}</td>--%>
-<%--                        <td>${b.totalPrice}</td>--%>
-<%--                    </tr>--%>
-<%--                </c:if>--%>
-<%--            </c:forEach>--%>
+        </c:if>
+        <c:if test="${bookingId == 2}">
+            <c:forEach items="${booking}" var="b">
+
+                                <c:if test="${b.isBill == 1}">
+                <tr>
+                    <td>${b.id}</td>
+                    <td>${b.homeStay.avatar} </td>
+                    <td>${b.homeStay.home_name}</td>
+                    <td>${b.totalDay}</td>
+                    <td>${b.homeStay.price}</td>
+                    <td>${b.totalPrice}</td>
+                    <td>
+                        <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>
+                        <button class="btn btn-danger" onclick="cancel2(${b.id})">Cancel</button>
+                    </td>
+                </tr>
+                                </c:if>
+            </c:forEach>
+        </c:if>
         </tbody>
     </table>
 </div>
@@ -83,6 +91,11 @@
     function cancel(id) {
         if (confirm("Are you sure?")) {
             window.location.href = `http://localhost:8080/BookingServlet?action=cancel&&id=` + id
+        }
+    }
+    function cancel2(id) {
+        if (confirm("Are you sure?")) {
+            window.location.href = `http://localhost:8080/BookingServlet?action=cancelUser&&id=` + id
         }
     }
 </script>

@@ -124,7 +124,9 @@ public class Home_StayServlet extends HttpServlet {
         private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             int id = Integer.parseInt(request.getParameter("id"));
             home_stayService.deleteById(id);
-            response.sendRedirect("/Home_StayServlet");
+            request.setAttribute("home_stay", home_stayService.getList(bookingService));
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
+            requestDispatcher.forward(request, response);
         }
         private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String search = request.getParameter("search");

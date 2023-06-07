@@ -113,7 +113,7 @@ public class UserServlet extends HttpServlet {
 
         if (userService.checkId(id) && roleService.checkById(roleId)) {
             userService.save(request);
-            response.sendRedirect("/UserServlet");
+            response.sendRedirect("/Home_StayServlet");
         } else {
             response.sendRedirect("/404.jsp");
         }
@@ -131,14 +131,6 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("/Home_StayServlet");
     }
 
-    //
-//    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String search = request.getParameter("search");
-//        List<Student> students = studentService.searchByName(search);
-//        request.setAttribute("students", students);
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/student/home.jsp");
-//        requestDispatcher.forward(request, response);
-//    }
     private void changeGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserByID(id);
@@ -166,15 +158,11 @@ public class UserServlet extends HttpServlet {
         User user = new User(id, username, newPassword, avatar, full_name, address, phone, role);
         if (user != null) {
             userService.update(user);
-            response.sendRedirect("/UserServlet");
+            response.sendRedirect("/Home_StayServlet");
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
-
-//    privae void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.sendRedirect("/Login/login.jsp");
-//    }
 
     private void loginPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");

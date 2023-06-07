@@ -21,11 +21,6 @@
 <div class="container">
     <h1 style="text-align: center">List Home_Stay</h1>
     <div class="row">
-        <div class="col-lg-2">
-            <a class="btn btn-primary" style="text-decoration: none; color: white"
-               href="/Home_StayServlet?action=create">Back
-                to Home</a>
-        </div>
         <div class="col-lg-6">
             <a class="btn btn-primary" style="text-decoration: none; color: white" href="/Home_StayServlet">Back Home
                 Booking</a>
@@ -62,24 +57,18 @@
                     </tr>
                 </c:if>
             </c:forEach>
-            <c:forEach items="${booking}" var="b">
-                <c:if test="${b.isBill ==0}">
-                    <tr>
-                        <td>${b.id}</td>
-                        <td>${b.homeStay.avatar} </td>
-                        <td>${b.homeStay.home_name}</td>
-                        <td>${b.totalDay}</td>
-                        <td>${b.homeStay.price}</td>
-                        <td>${b.totalPrice}</td>
-
-                        <td>
-                                <%--                       <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>--%>
-<%--                                                        <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button>--%>
-                        </td>
-
-                    </tr>
-                </c:if>
-            </c:forEach>
+<%--            <c:forEach items="${booking}" var="b">--%>
+<%--                <c:if test="${b.isBill ==0}">--%>
+<%--                    <tr>--%>
+<%--                        <td>${b.id}</td>--%>
+<%--                        <td>${b.homeStay.avatar} </td>--%>
+<%--                        <td>${b.homeStay.home_name}</td>--%>
+<%--                        <td>${b.totalDay}</td>--%>
+<%--                        <td>${b.homeStay.price}</td>--%>
+<%--                        <td>${b.totalPrice}</td>--%>
+<%--                    </tr>--%>
+<%--                </c:if>--%>
+<%--            </c:forEach>--%>
         </tbody>
     </table>
 </div>

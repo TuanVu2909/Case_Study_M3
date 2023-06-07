@@ -95,21 +95,19 @@
                         <div class="card-body">
                             <h5 class="card-title">${h.home_name}</h5>
                             <p class="card-text">${h.address}</p>
-                            <h5>${h.price}</h5>
-                            <a href="#" class="btn btn-primary">Book</a>
+                            <h5>${h.price}/Day</h5>
+                            <c:if test="${sessionScope.username !=null}">
+                            <c:if test="${sessionScope.username.getRole().id ==1}">
+                            <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Delete</a>
+                            <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Update</a>
+                            </c:if>
+                                <c:if test="${sessionScope.username.getRole().id ==2}">
+                                    <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Booking</a>
+                                </c:if>
+                            </c:if>
                         </div>
                     </div>
                     </c:forEach>
-                <div class="card image-container col-md-4-lg-4" style="width: 22rem;margin-right: 10px">
-                    <img src="https://noithatkendesign.vn/storage/app/media/1%20b%C3%ACa/khong-gian-sinh-hoat-chung-ccasa-hostel-nha-trang.jpg"
-                         class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Home stay name</h5>
-                        <p class="card-text">Address: 24 Sao Bien, Vinh Hai Ward, Nha Trang City, Khanh Hoa provide</p>
-                        <h5 class="btn btn-primary">500.000 VND</h5><br>
-                        <a href="#" class="btn btn-primary">Book</a>
-                    </div>
-                </div>
 
             </div>
         </div>

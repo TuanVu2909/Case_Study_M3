@@ -22,7 +22,6 @@ public class UserServlet extends HttpServlet {
     private final Validate validate = Validate.getInstance();
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
@@ -42,7 +41,7 @@ public class UserServlet extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
-                case "logout":
+            case "logout":
                 logout(request, response);
                 break;
             default:
@@ -88,13 +87,14 @@ public class UserServlet extends HttpServlet {
         int roleId = Integer.parseInt(request.getParameter("role"));
 
         if (roleService.checkById(roleId)) {
-             userService.save(request);
-                response.sendRedirect("/UserServlet");
+            userService.save(request);
+            response.sendRedirect("/UserServlet");
 
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
+
     private void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         if (userService.checkId(id)) {
@@ -106,25 +106,28 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect("/404.jsp");
         }
     }
+
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         int roleId = Integer.parseInt(request.getParameter("role"));
 
-        if (userService.checkId(id)&&roleService.checkById(roleId)) {
-           userService.save(request);
+        if (userService.checkId(id) && roleService.checkById(roleId)) {
+            userService.save(request);
             response.sendRedirect("/UserServlet");
         } else {
             response.sendRedirect("/404.jsp");
         }
     }
+
     private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         userService.deleteById(id);
         response.sendRedirect("/UserServlet");
     }
+
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       HttpSession session = request.getSession();
-       session.invalidate();
+        HttpSession session = request.getSession();
+        session.invalidate();
         response.sendRedirect("/Home_StayServlet");
     }
 
@@ -177,23 +180,28 @@ public class UserServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         List<User> userList = userService.getList(bookingService);
+        boolean flag = false;
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username",u);
+                    session.setAttribute("username", u);
                     response.sendRedirect("/Home_StayServlet");
+                    flag = true;
                     break;
-                }else {
+                } else {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username",u);
+                    session.setAttribute("username", u);
                     response.sendRedirect("/Home_StayServlet");
+                    flag = true;
                     break;
                 }
-            }else {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/404.jsp");
-                requestDispatcher.forward(request, response);
             }
+
+        }
+        if (!flag) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/404.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }

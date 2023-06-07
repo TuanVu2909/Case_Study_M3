@@ -72,7 +72,7 @@ public class BookingServlet extends HttpServlet {
             case "search2":
                 search2(request, response);
                 break;
-            case "search3":
+            case "bookingForm":
                 try {
                     bookingBill(request,response);
                 } catch (ParseException e) {
@@ -186,6 +186,9 @@ public class BookingServlet extends HttpServlet {
     private void cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         bookingService.deleteById(id);
-        response.sendRedirect("/BookingServlet");
+
+        request.setAttribute("booking", bookingService.getList(bookingService));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

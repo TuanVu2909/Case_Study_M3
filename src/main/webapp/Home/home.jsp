@@ -17,16 +17,53 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
-<form style="width: 600px; margin: auto"
-      action="/UserServlet?action=login">
-    <div class="row">
-    <div class="col-lg-5">
-    <a class="btn btn-secondary" href="/Login/login.jsp">Login</a>
-    </div>
-    <div class="col-lg-5">
-        <a class="btn btn-secondary" href="/UserServlet">Back to Menu</a>
-    </div>
-    </div>
+<c:if test="${sessionScope.username !=null}">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Booking</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
+        </li>
+    </ul>
+</c:if>
+<form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 </form>
+<c:if test="${sessionScope.username ==null}">
+    <div>
+        <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-success register-btn" href="/User/Register.jsp">Register</a>
+    </div>
+</c:if>
+<c:if test="${sessionScope.username !=null}">
+    <div>
+        <p>${sessionScope.username.username}</p>
+        <a class="btn btn-outline-success register-btn" href="/UserServlet?action=logout">Logout</a>
+    </div>
+</c:if>
+
+
+<div class="row">
+    <c:forEach items="${home_stay}" var="h">
+
+    <div class="card" style="width: 20rem;margin-right: 10px">
+        <img src="https://noithatkendesign.vn/storage/app/media/1%20b%C3%ACa/khong-gian-sinh-hoat-chung-ccasa-hostel-nha-trang.jpg"
+             class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${h.home_name}</h5>
+            <p class="card-text">${h.address}</p>
+            <h5>${h.price}</h5>
+            <a href="#" class="btn btn-primary">Book</a>
+        </div>
+    </div>
+    </c:forEach>
+
+
+
 </body>
 </html>

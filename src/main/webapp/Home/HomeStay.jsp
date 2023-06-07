@@ -24,7 +24,9 @@
 
 <div class="container">
 
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
         <a class="navbar-brand" href="Home_StayServlet" >Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,12 +39,7 @@
                 <li class="nav-item active">
                     <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Booking</a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
                 </li>
@@ -64,10 +61,14 @@
                 <div>
                     <p>${sessionScope.username.username}</p>
                     <a class="btn btn-outline-success register-btn" href="/UserServlet?action=logout">Logout</a>
+                    <div>
+                        <a class="btn btn-outline-success register-btn" href="/Home_StayServlet?action=bookingservice">Booking</a>
+                    </div>
                 </div>
             </c:if>
         </div>
     </nav>
+
 
     <ul class="dropdown-menu dropdown-menu-start"
         aria-labelledby="navbarDropdownMenuAvatar">
@@ -99,39 +100,16 @@
                         </div>
                     </div>
                     </c:forEach>
-
-<%--                <div class="card" style="width: 20rem; margin-right: 10px">--%>
-<%--                    <img src="https://images.foody.vn/images/25152087_1007781622706987_3773708146294154795_n(2).jpg"--%>
-<%--                         class="card-img-top" alt="...">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <h5 class="card-title">Card title</h5>--%>
-<%--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of--%>
-<%--                            the card's content.</p>--%>
-<%--                        <a href="#" class="btn btn-primary">Book</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="card" style="width: 20rem;margin-right: 10px">--%>
-<%--                    <img src="https://agotourist.com/wp-content/uploads/2020/04/pine-hill-homestay-da-lat.jpg"--%>
-<%--                         class="card-img-top" alt="...">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <h5 class="card-title">Card title</h5>--%>
-<%--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of--%>
-<%--                            the card's content.</p>--%>
-<%--                        <a href="#" class="btn btn-primary">Book</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="card" style="width: 20rem;margin-right: 10px">--%>
-<%--                    <img src="https://zhomestay.vn/wp-content/uploads/2022/10/GTD_9713-copy.jpg" class="card-img-top"--%>
-<%--                         alt="...">--%>
-<%--                    <div class="card-body">--%>
-<%--                        <h5 class="card-title">a</h5>--%>
-<%--                        <p class="card-text">a</p>--%>
-<%--                        <a href="#" class="btn btn-primary">Book</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
+                <div class="card image-container col-md-4-lg-4" style="width: 22rem;margin-right: 10px">
+                    <img src="https://noithatkendesign.vn/storage/app/media/1%20b%C3%ACa/khong-gian-sinh-hoat-chung-ccasa-hostel-nha-trang.jpg"
+                         class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Home stay name</h5>
+                        <p class="card-text">Address: 24 Sao Bien, Vinh Hai Ward, Nha Trang City, Khanh Hoa provide</p>
+                        <h5 class="btn btn-primary">500.000 VND</h5><br>
+                        <a href="#" class="btn btn-primary">Book</a>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -139,63 +117,35 @@
     </div>
 </div>
 
-<footer class="text-center text-white" style="background-color: #f1f1f1;">
-    <div class="container pt-4">
-        <section class="mb-4">
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-facebook-f"></i
-            ></a>
+<footer class="bg-light text-center text-lg-start">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
 
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-twitter"></i
-            ></a>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
 
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-google"></i
-            ></a>
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
 
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-instagram"></i
-            ></a>
-
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-linkedin"></i
-            ></a>
-            <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-            ><i class="fab fa-github"></i
-            ></a>
-        </section>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2020 Copyright:
         <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
     </div>
-
 </footer>
 </div>
 </div>
@@ -215,7 +165,6 @@
         });
     });
 </script>
-
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
@@ -229,6 +178,32 @@
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
+</script>
+<script>
+    const images = document.querySelectorAll('.image-container img');
+    images.forEach(function (image) {
+        image.addEventListener('mouseenter', function () {
+            this.classList.add('zoomed');
+        });
+        image.addEventListener('mouseleave', function () {
+            this.classList.remove('zoomed');
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').click(function (e) {
+            e.preventDefault();
+            $(this).parent().toggleClass('show');
+        });
+
+        $(document).click(function (e) {
+            var target = e.target;
+            if (!$(target).is('.dropdown-toggle') && !$(target).parents().is('.dropdown-toggle')) {
+                $('.dropdown').removeClass('show');
+            }
+        });
+    });
 </script>
 </body>
 </html>

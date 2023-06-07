@@ -36,6 +36,9 @@ public class Home_StayServlet extends HttpServlet {
                 case "booking":
                     bookingGet(request, response);
                     break;
+                case "bookingservice":
+                    bookingservice(request, response);
+                    break;
 
                 default:
                     findAdd(request, response);
@@ -67,9 +70,14 @@ public class Home_StayServlet extends HttpServlet {
         }
         private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setAttribute("home_stay", home_stayService.getList(bookingService));
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/home.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
             requestDispatcher.forward(request, response);
         }
+    private void bookingservice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("home_stay", home_stayService.getList(bookingService));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/home.jsp");
+        requestDispatcher.forward(request, response);
+    }
         private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setAttribute("user", userService.getList(bookingService));
             request.setAttribute("status", statusService.getList(bookingService));
@@ -137,7 +145,7 @@ public class Home_StayServlet extends HttpServlet {
             Home_Stay home_stay = home_stayService.getHomeById(id);
             home_stayList.add(home_stay);
             request.setAttribute("homestay",home_stay);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/bookingHomeStay.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/bookingDemo.jsp");
         requestDispatcher.forward(request, response);
     }
 }

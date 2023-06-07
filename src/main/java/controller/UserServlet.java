@@ -42,6 +42,9 @@ public class UserServlet extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
+                case "logout":
+                logout(request, response);
+                break;
             default:
                 findAdd(request, response);
         }
@@ -119,6 +122,11 @@ public class UserServlet extends HttpServlet {
         userService.deleteById(id);
         response.sendRedirect("/UserServlet");
     }
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       HttpSession session = request.getSession();
+       session.invalidate();
+        response.sendRedirect("/Home_StayServlet");
+    }
 
     //
 //    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -172,16 +180,14 @@ public class UserServlet extends HttpServlet {
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
-                    request.setAttribute("userLogin", u);
-                    request.setAttribute("user", userService.getList(bookingService));
-                    requestDispatcher.forward(request, response);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username",u);
+                    response.sendRedirect("/Home_StayServlet");
                     break;
                 }else {
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login/user.jsp");
-                    request.setAttribute("userLogin", u);
-                    request.setAttribute("user", userService.getList(bookingService));
-                    requestDispatcher.forward(request, response);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username",u);
+                    response.sendRedirect("/Home_StayServlet");
                     break;
                 }
             }else {

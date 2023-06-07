@@ -45,7 +45,6 @@
         </thead>
 
         <jsp:useBean id="booking" scope="request" type="java.util.List"/>
-        <c:if test="${user.role_id == 2}">
             <c:forEach items="${booking}" var="b">
 
                 <c:if test="${b.isBill == 1}">
@@ -63,8 +62,6 @@
                     </tr>
                 </c:if>
             </c:forEach>
-        </c:if>
-        <c:if test="${user.role_id == 1}">
             <c:forEach items="${booking}" var="b">
                 <c:if test="${b.isBill ==0}">
                     <tr>
@@ -83,7 +80,6 @@
                     </tr>
                 </c:if>
             </c:forEach>
-        </c:if>
         </tbody>
     </table>
 </div>

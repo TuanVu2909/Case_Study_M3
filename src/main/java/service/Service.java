@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 
 public interface Service<E> {
-    List<E> getList();
+    List<E> getList(BookingService bookingService);
     void create(E e);
     void update(E e);
     void delete();

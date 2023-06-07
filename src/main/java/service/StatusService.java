@@ -38,7 +38,7 @@ public class StatusService implements Service<Status> {
 
 
     @Override
-    public List<Status> getList() {
+    public List<Status> getList(BookingService bookingService) {
         return statusDAO.getStatusList();
     }
 

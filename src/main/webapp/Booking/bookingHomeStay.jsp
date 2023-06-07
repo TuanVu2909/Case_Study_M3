@@ -50,10 +50,11 @@
         <td>${homestay.user.username}</td>
         <td>${homestay.avatar}</td>
         <td>
-            <button class="btn btn-danger" onclick="booking(${homestay.id})">Booking</button>
+
         </td>
         <td>
-            <button class="btn btn-danger" type="submit">Booking</button>
+<%--            <button class="btn btn-danger" type="submit">Booking</button>--%>
+    <button class="btn btn-danger" onclick="booking(${homestay.id})">Booking</button>
         </td>
         <%--        <td>--%>
         <%--          <a class="btn btn-warning" href="/Home_StayServlet?action=booking&&id=${homestay.id}">Booking</a>--%>
@@ -69,6 +70,7 @@
 <script>
     function booking(id) {
         if (confirm("Are you sure?")) {
+            alert("Booking success!")
             window.location.href = `http://localhost:8080/BookingServlet?action=booking2&&id=` + id
         }
     }

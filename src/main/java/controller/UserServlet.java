@@ -3,6 +3,7 @@ package controller;
 import model.Role;
 import model.User;
 import model.Validate;
+import service.BookingService;
 import service.RoleService;
 import service.UserService;
 
@@ -16,7 +17,11 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
     private final RoleService roleService = RoleService.getInstance();
+
+    private final BookingService bookingService = BookingService.getInstance();
     private final Validate validate = Validate.getInstance();
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -68,13 +73,13 @@ public class UserServlet extends HttpServlet {
     }
 
     private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("user", userService.getList());
+        request.setAttribute("user", userService.getList(bookingService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("role", roleService.getList());
+        request.setAttribute("role", roleService.getList(bookingService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/create.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -95,7 +100,7 @@ public class UserServlet extends HttpServlet {
         if (userService.checkId(id)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/update.jsp");
             request.setAttribute("user", userService.getUserByID(id));
-            request.setAttribute("role", roleService.getList());
+            request.setAttribute("role", roleService.getList(bookingService));
             requestDispatcher.forward(request, response);
         } else {
             response.sendRedirect("/404.jsp");
@@ -132,7 +137,7 @@ public class UserServlet extends HttpServlet {
         if (user != null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/change.jsp");
             request.setAttribute("user", user);
-            request.setAttribute("role", roleService.getList());
+            request.setAttribute("role", roleService.getList(bookingService));
             requestDispatcher.forward(request, response);
         } else {
             response.sendRedirect("/404.jsp");
@@ -166,19 +171,19 @@ public class UserServlet extends HttpServlet {
     private void loginPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        List<User> userList = userService.getList();
+        List<User> userList = userService.getList(bookingService);
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
                     request.setAttribute("userLogin", u);
-                    request.setAttribute("user", userService.getList());
+                    request.setAttribute("user", userService.getList(bookingService));
                     requestDispatcher.forward(request, response);
                     break;
                 }else {
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login/user.jsp");
                     request.setAttribute("userLogin", u);
-                    request.setAttribute("user", userService.getList());
+                    request.setAttribute("user", userService.getList(bookingService));
                     requestDispatcher.forward(request, response);
                     break;
                 }

@@ -66,13 +66,13 @@ public class Home_StayServlet extends HttpServlet {
             }
         }
         private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.setAttribute("home_stay", home_stayService.getList());
+            request.setAttribute("home_stay", home_stayService.getList(bookingService));
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/home.jsp");
             requestDispatcher.forward(request, response);
         }
         private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.setAttribute("user", userService.getList());
-            request.setAttribute("status", statusService.getList());
+            request.setAttribute("user", userService.getList(bookingService));
+            request.setAttribute("status", statusService.getList(bookingService));
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/create.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -92,8 +92,8 @@ public class Home_StayServlet extends HttpServlet {
             if (homeStay != null) {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/update.jsp");
                 request.setAttribute("home_stay", homeStay);
-                request.setAttribute("user", userService.getList());
-                request.setAttribute("status", statusService.getList());
+                request.setAttribute("user", userService.getList(bookingService));
+                request.setAttribute("status", statusService.getList(bookingService));
                 requestDispatcher.forward(request, response);
             } else {
                 response.sendRedirect("/404.jsp");

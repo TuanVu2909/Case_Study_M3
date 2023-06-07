@@ -8,10 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,9 +33,6 @@ public class BookingServlet extends HttpServlet {
             case "update":
                 updateGet(request, response);
                 break;
-            case "delete":
-                delete(request, response);
-                break;
             case "booking":
                 bookingGet(request, response);
                 break;
@@ -49,7 +43,11 @@ public class BookingServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-
+            case "pay":
+                payGet(request,response);
+                break;
+            case "cancel":
+                cancel(request,response);
             default:
                 findAdd(request, response);
         }
@@ -87,7 +85,8 @@ public class BookingServlet extends HttpServlet {
         }
     }
     private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("booking", bookingService.getList());
+
+        request.setAttribute("booking", bookingService.getList(bookingService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -117,7 +116,7 @@ public class BookingServlet extends HttpServlet {
         if (homeStay != null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/update.jsp");
             request.setAttribute("home_stay", homeStay);
-            request.setAttribute("user", userService.getList());
+            request.setAttribute("user", userService.getList(bookingService));
             requestDispatcher.forward(request, response);
         } else {
             response.sendRedirect("/404.jsp");
@@ -128,11 +127,6 @@ public class BookingServlet extends HttpServlet {
 
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        home_stayService.deleteById(id);
-        response.sendRedirect("/Home_StayServlet");
-    }
     private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search");
         List<Home_Stay> home_stayList = home_stayService.searchName(search);
@@ -164,29 +158,34 @@ public class BookingServlet extends HttpServlet {
         int isBill = 1;
         Booking booking =new Booking(user,home_stay,start_date,end_date,action,isBill);
         bookingService.create(booking);
-        List<Booking> bookingList = bookingService.getList();
-        List<Integer> dateList = new ArrayList<>();
-        for (Booking b:bookingList) {
-            int date = bookingService.dateDiff(b);
-            dateList.add(date);
-        }
-        request.setAttribute("date", dateList);
-        request.setAttribute("booking", bookingService.getList());
+        request.setAttribute("booking", bookingService.getList(bookingService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }
     private void search4(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Booking> bookingList = bookingService.getList();
+        List<Booking> bookingList = bookingService.getList(bookingService);
         List<Integer> dateList = new ArrayList<>();
         for (Booking b:bookingList) {
             int date = bookingService.dateDiff(b);
             dateList.add(date);
         }
         request.setAttribute("date", dateList);
-        request.setAttribute("booking", bookingService.getList());
+        request.setAttribute("booking", bookingService.getList(bookingService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
     }
+    private void payGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Booking booking = bookingService.getBookingById(id);
+        booking.setIsBill(0);
+        bookingService.update(booking);
+        response.sendRedirect("/BookingServlet");
 
+    }
 
+    private void cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        bookingService.deleteById(id);
+        response.sendRedirect("/BookingServlet");
+    }
 }

@@ -31,7 +31,7 @@ public class RoleService implements Service<Role> {
     }
 
     @Override
-    public List<Role> getList() {
+    public List<Role> getList(BookingService bookingService) {
         return roleDAO.getRoleList();
     }
 

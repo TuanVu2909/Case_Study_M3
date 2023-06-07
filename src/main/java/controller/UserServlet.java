@@ -159,7 +159,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-//    private void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//    privae void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        response.sendRedirect("/Login/login.jsp");
 //    }
 

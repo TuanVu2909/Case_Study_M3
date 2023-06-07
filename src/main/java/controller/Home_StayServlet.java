@@ -67,7 +67,7 @@ public class Home_StayServlet extends HttpServlet {
         }
         private void findAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             request.setAttribute("home_stay", home_stayService.getList());
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home_Stay/home.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
             requestDispatcher.forward(request, response);
         }
         private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

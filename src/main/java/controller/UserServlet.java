@@ -37,9 +37,9 @@ public class UserServlet extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
-//            case "login":
-//                loginGet(request, response);
-//                break;
+            case "logout":
+                logout(request, response);
+                break;
             default:
                 findAdd(request, response);
         }
@@ -75,13 +75,12 @@ public class UserServlet extends HttpServlet {
 
     private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("role", roleService.getList());
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/create.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/Register.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roleId = Integer.parseInt(request.getParameter("role"));
-
         if (roleService.checkById(roleId)) {
              userService.save(request);
                 response.sendRedirect("/UserServlet");
@@ -118,14 +117,6 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("/UserServlet");
     }
 
-    //
-//    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String search = request.getParameter("search");
-//        List<Student> students = studentService.searchByName(search);
-//        request.setAttribute("students", students);
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/student/home.jsp");
-//        requestDispatcher.forward(request, response);
-//    }
     private void changeGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.getUserByID(id);
@@ -159,25 +150,32 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-//    private void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.sendRedirect("/Login/login.jsp");
-//    }
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect("/Home/HomeStay.jsp");
+    }
 
     private void loginPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         List<User> userList = userService.getList();
+        HttpSession session = request.getSession();
         for (User u : userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/User/home.jsp");
-                    request.setAttribute("userLogin", u);
+                  session.setAttribute("username",u.getUsername());
+                  session.setAttribute("roleId",u.getRole().getId());
+                  session.setAttribute("login",u.getRole().getId());
                     request.setAttribute("user", userService.getList());
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
                     requestDispatcher.forward(request, response);
                     break;
                 }else {
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login/user.jsp");
-                    request.setAttribute("userLogin", u);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Home/HomeStay.jsp");
+                    session.setAttribute("username",u.getUsername());
+                    session.setAttribute("roleId",u.getRole().getId());
+                    session.setAttribute("login",u.getRole().getId());
                     request.setAttribute("user", userService.getList());
                     requestDispatcher.forward(request, response);
                     break;

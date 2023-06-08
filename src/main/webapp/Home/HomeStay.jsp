@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Duc
-  Date: 07/06/2023
-  Time: 9:56 SA
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -19,7 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="homecss.css">
-
 </head>
 <body>
 
@@ -35,31 +28,21 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<c:if test="${sessionScope.username !=null}">
+            <c:if test="${sessionScope.user !=null}">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Booking</a>
+                    </li>
 
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="btn btn-outline-success login-btn" href="/UserServlet?action=update&&id=${username.id}">Profile</a>
-                </li>
-        <c:if test="${sessionScope.username.getRole().id ==1}">
-                <li class="nav-item">
-                    <a class="btn btn-outline-success login-btn" href="/Home_StayServlet?action=create">Create</a>
-                </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-success login-btn" href="/BookingServlet?action=bookingAdmin&&id=${sessionScope.username.getRole().id}">Booking List</a>
-            </li>
-        </c:if>
-    <c:if test="${sessionScope.username.getRole().id ==2}">
-        <li class="nav-item">
-            <a class="btn btn-outline-success login-btn" href="/BookingServlet?action=bookingUser&&id=${sessionScope.username.id}">Booking List</a>
-        </li>
-    </c:if>
-            </ul>
-</c:if>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
+                    </li>
+                </ul>
+            </c:if>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <c:if test="${sessionScope.username ==null}">
+            <c:if test="${sessionScope.user ==null}">
                 <div>
                     <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
                 </div>
@@ -68,10 +51,13 @@
                     <a class="btn btn-outline-success register-btn" href="/User/Register.jsp">Register</a>
                 </div>
             </c:if>
-            <c:if test="${sessionScope.username !=null}">
-                <div class="profile">
-                    <a id="username"><i class="glyphicon glyphicon-user"></i>${sessionScope.username.username}</a>
+            <c:if test="${sessionScope.user !=null}">
+                <div>
+                    <p>${sessionScope.user.username}</p>
                     <a class="btn btn-outline-success register-btn" href="/UserServlet?action=logout">Logout</a>
+                    <div>
+                        <a class="btn btn-outline-success register-btn" href="/BookingServlet?action=search4">List Booking</a>
+                    </div>
                 </div>
             </c:if>
         </div>
@@ -102,20 +88,25 @@
                              class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">${h.home_name}</h5>
-                            <p class="card-text">Address: ${h.address}</p>
-                            <h5> Price: ${h.price}/Day</h5>
-                            <c:if test="${sessionScope.username !=null}">
-                            <c:if test="${sessionScope.username.getRole().id ==1}">
-                            <a href="/Home_StayServlet?action=delete&&id=${h.id}" class="btn btn-primary">Delete</a>
-                            <a href="/Home_StayServlet?action=update&&id=${h.id}" class="btn btn-primary">Update</a>
-                            </c:if>
-                                <c:if test="${sessionScope.username.getRole().id ==2}">
-                                    <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Booking</a>
+                            <p class="card-text">${h.address}</p>
+                            <h5>${h.price}/Day</h5>
+                            <h6>${h.status.name}</h6>
+                            <c:if test="${sessionScope.user !=null}">
+                                <c:if test="${sessionScope.user.getRole().id ==1}">
+                                    <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Delete</a>
+                                    <a href="/Home_StayServlet?action=update&&id=${h.id}" class="btn btn-primary">Update</a>
+                                </c:if>
+                                <c:if test="${sessionScope.user.getRole().id ==2}">
+
+                                    <c:if test="${h.status.id == 3 || h.status.id == 4}">
+                                        <a href="/Home_StayServlet?action=booking&&id=${h.id}" class="btn btn-primary">Booking</a>
+                                    </c:if>
+
                                 </c:if>
                             </c:if>
                         </div>
                     </div>
-                    </c:forEach>
+                </c:forEach>
 
             </div>
         </div>
@@ -127,11 +118,23 @@
     <div class="container p-4">
         <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Company</h5>
-                <a href="https://www.facebook.com/profile.php?id=100003937086054">Member Le Duc</a><br>
-                <a href="https://www.facebook.com/profile.php?id=100003937086054">Member Tuan Vu</a><br>
-                <a href="https://www.facebook.com/profile.php?id=100003937086054">Member Ly</a>
+                <h5 class="text-uppercase">Footer text</h5>
 
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
             </div>
         </div>
     </div>

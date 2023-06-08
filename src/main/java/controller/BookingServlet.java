@@ -212,6 +212,11 @@ public class BookingServlet extends HttpServlet {
         Booking booking = bookingService.getBookingById(id);
         booking.setIsBill(0);
         bookingService.update(booking);
+        Home_Stay homeStay = home_stayService.getHomeById(booking.getHomeStay().getId());
+        Status newStatus = homeStay.getStatus();
+        newStatus.setId(1);
+        homeStay.setStatus(newStatus);
+        home_stayService.update(homeStay);
         request.setAttribute("booking", bookingService.getList(bookingService));
         request.setAttribute("bookingId", 2);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");

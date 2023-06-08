@@ -173,13 +173,13 @@ public class UserServlet extends HttpServlet {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 if (u.getRole().getId() == 1) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username", u);
+                    session.setAttribute("user", u);
                     response.sendRedirect("/Home_StayServlet");
                     flag = true;
                     break;
                 } else {
                     HttpSession session = request.getSession();
-                    session.setAttribute("username", u);
+                    session.setAttribute("user", u);
                     response.sendRedirect("/Home_StayServlet");
                     flag = true;
                     break;

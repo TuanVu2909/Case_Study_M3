@@ -45,7 +45,7 @@
         </div>
         <div class="mb-3">
             <button class="btn btn-primary" type="submit">Update</button>
-            <a class="btn btn-secondary" href="/UserServlet">Back to home</a>
+            <a class="btn btn-secondary" href="/Home_StayServlet">Back to home</a>
             <a class="btn btn-primary" href="/UserServlet?action=change&&id=${user.id}">Change to Password</a>
         </div>
     </form>

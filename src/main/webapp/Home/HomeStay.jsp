@@ -31,22 +31,30 @@
             <c:if test="${sessionScope.user !=null}">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Booking</a>
+                        <a class="btn btn-outline-success login-btn" href="/UserServlet?action=update&&id=${user.id}">Profile</a>
                     </li>
-
+                    <c:if test="${sessionScope.user.getRole().id ==1}">
                     <li class="nav-item">
-                        <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
+                        <a class="btn btn-outline-success login-btn" href="/Home_StayServlet?action=create">Create</a>
                     </li>
-                </ul>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success register-btn" href="/BookingServlet?action=search4">List Booking</a>
+                    </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user.getRole().id ==2}">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success register-btn" href="/BookingServlet?action=search4">List Booking</a>
+                    </li>
+                    </c:if>
             </c:if>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             </form>
             <c:if test="${sessionScope.user ==null}">
-                <div>
+
+                    <div>
                     <a class="btn btn-outline-success login-btn" href="/Login/login.jsp">Login</a>
                 </div>
-
                 <div>
                     <a class="btn btn-outline-success register-btn" href="/User/Register.jsp">Register</a>
                 </div>
@@ -55,14 +63,11 @@
                 <div>
                     <p>${sessionScope.user.username}</p>
                     <a class="btn btn-outline-success register-btn" href="/UserServlet?action=logout">Logout</a>
-                    <div>
-                        <a class="btn btn-outline-success register-btn" href="/BookingServlet?action=search4">List Booking</a>
-                    </div>
+
                 </div>
             </c:if>
         </div>
     </nav>
-
 
     <ul class="dropdown-menu dropdown-menu-start"
         aria-labelledby="navbarDropdownMenuAvatar">
@@ -84,7 +89,7 @@
                 <c:forEach items="${home_stay}" var="h">
 
                     <div class="card" style="width: 20rem;margin-right: 10px">
-                        <img src="https://noithatkendesign.vn/storage/app/media/1%20b%C3%ACa/khong-gian-sinh-hoat-chung-ccasa-hostel-nha-trang.jpg"
+                        <img src="${h.avatar}"
                              class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">${h.home_name}</h5>
@@ -128,13 +133,6 @@
             </div>
 
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Footer text</h5>
-
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
-                </p>
             </div>
         </div>
     </div>

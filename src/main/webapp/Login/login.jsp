@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-lg-6 d-flex align-items-center gradient-custom-2"
                                  style="background-color: white;">
-                                <img style="height: 855px" src="homestay-moc-chau-30.jpg" height="2300" width="1650"/>
+                                <img style="height: 855px" src="../image/homestay-moc-chau-30.jpg" height="2300" width="1650"/>
                                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                                 </div>
                             </div>

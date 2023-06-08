@@ -9,6 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <style>
+        td > img {    max-width: 170px;}
+    </style>
 </head>
 <body>
 
@@ -35,22 +38,26 @@
         </thead>
 
         <jsp:useBean id="booking" scope="request" type="java.util.List"/>
+
+        <c:if test="${sessionScope.user.role.id == 1}">
         <c:forEach items="${booking}" var="b">
-            <c:if test="${sessionScope.user.role.id == 1}">
                 <tr>
                     <td>${b.id}</td>
-                    <td>${b.homeStay.avatar} </td>
+                    <td><img src="${b.homeStay.avatar}" alt=""></td>
                     <td>${b.homeStay.home_name}</td>
                     <td>${b.totalDay}</td>
                     <td>${b.homeStay.price}</td>
                     <td>${b.totalPrice}</td>
                     <td>${b.isBill == 0 ? 'Done' : 'Waiting payment'}</td>
                 </tr>
+        </c:forEach>
             </c:if>
+
             <c:if test="${sessionScope.user.role.id != 1}">
+                <c:forEach items="${booking}" var="b">
                 <tr>
                     <td>${b.id}</td>
-                    <td>${b.homeStay.avatar} </td>
+                    <td><img src="${b.homeStay.avatar}" alt=""></td>
                     <td>${b.homeStay.home_name}</td>
                     <td>${b.totalDay}</td>
                     <td>${b.homeStay.price}</td>
@@ -61,11 +68,9 @@
                             <button class="btn btn-danger" onclick="pay(${b.id})">Pay</button>
                             <button class="btn btn-danger" onclick="cancel(${b.id})">Cancel</button> </td>
                     </c:if>
-
-
                 </tr>
+                </c:forEach>
             </c:if>
-        </c:forEach>
         </tbody>
     </table>
 </div>

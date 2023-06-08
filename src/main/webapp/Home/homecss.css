@@ -4,3 +4,8 @@
 .profile-a{
     display: block;
 }
+.thai123{
+    display: flex;
+    flex: 1;
+    margin-left: 600px;
+}

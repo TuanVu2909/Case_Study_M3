@@ -217,7 +217,8 @@ public class BookingServlet extends HttpServlet {
         newStatus.setId(1);
         homeStay.setStatus(newStatus);
         home_stayService.update(homeStay);
-        request.setAttribute("booking", bookingService.getList(bookingService));
+        List<Booking> bookingList =bookingService.getList(bookingService);
+        request.setAttribute("booking",bookingList);
         request.setAttribute("bookingId", 2);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);
@@ -235,7 +236,8 @@ public class BookingServlet extends HttpServlet {
     private void cancelUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         bookingService.deleteById(id);
-        request.setAttribute("booking", bookingService.getList(bookingService));
+        List<Booking> bookingList =bookingService.getList(bookingService);
+        request.setAttribute("booking",bookingList);
         request.setAttribute("bookingId", 2);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Booking/home.jsp");
         requestDispatcher.forward(request, response);

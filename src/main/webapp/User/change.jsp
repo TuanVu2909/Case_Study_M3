@@ -33,7 +33,7 @@
     <input type="text" class="form-control" id="enterPassword" name="enterPassword">
   </div>
   <button class="btn btn-primary" type="submit">Change password</button>
-  <a class="btn btn-secondary" href="/UserServlet">Back to home</a>
+  <a class="btn btn-secondary" href="/Home_StayServlet">Back to home</a>
 </div>
 
 </form>
